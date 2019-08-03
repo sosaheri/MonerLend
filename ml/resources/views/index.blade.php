@@ -45,7 +45,7 @@
                                    
                                 </ul>
                                 <div class="sing-up-button d-lg-none">
-                                    <a href="#">Ingresa</a>
+                                    <a href="{{ route('login') }}">Ingresa</a>
                                 </div>
                             </div>
                         </nav>
@@ -54,7 +54,7 @@
                 <!-- Signup btn -->
                 <div class="col-12 col-lg-2">
                     <div class="sing-up-button d-none d-lg-block">
-                        <a href="#">Ingresa</a>
+                        <a href="{{ route('login') }}">Ingresa</a>
                     </div>
                 </div>
             </div>
