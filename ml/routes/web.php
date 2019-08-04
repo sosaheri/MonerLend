@@ -15,6 +15,13 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('tyc', function () {
+    return view('toc');
+});
+
+Route::get('privacidad', function () {
+    return view('privacy');
+});
 
 Auth::routes();
 

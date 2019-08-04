@@ -1,9 +1,4 @@
-Edit in JSFiddle
-Result
-HTML
-CSS
-JavaScript
-Resources
+
 :root {
   --input-padding-x: 1.5rem;
   --input-padding-y: 0.75rem;
@@ -15,7 +10,7 @@ Resources
 }
 
 .bg-image {
-  /*background-image: url('https://source.unsplash.com/featured/?bitcoin,ethereum,criptos');*/
+
   background-image: url('https://source.unsplash.com/featured/?bitcoin,ethereum,criptos');
   background-size: cover;
   background-position: center;
@@ -87,9 +82,10 @@ Resources
 }
 
 .form-label-group input:not(:placeholder-shown)~label {
-  padding-top: calc(var(--input-padding-y) / 3);
+    /*calc(var(--input-padding-y) / 3);*/
+    padding-top: 0px !important;
   padding-bottom: calc(var(--input-padding-y) / 3);
-  font-size: 12px;
+  font-size: 10px;
   color: #777;
 }
 

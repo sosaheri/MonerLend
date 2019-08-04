@@ -294,8 +294,8 @@
             <nav>
                 <ul>
                     
-                    <li><a href="#">Terminos &amp; Condiciones</a></li>
-                    <li><a href="#">Politica de Privacidad</a></li>
+                    <li><a href="./tyc">Terminos &amp; Condiciones</a></li>
+                    <li><a href="./privacidad">Politica de Privacidad</a></li>
                     
                 </ul>
             </nav>
