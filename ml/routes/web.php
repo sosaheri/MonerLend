@@ -16,6 +16,7 @@
 | Rutas estaticas para la web
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', function () {
     return view('index');
 });
@@ -35,14 +36,14 @@ Route::get('privacidad', function () {
 */
 
 Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');;
 
 /*
 |--------------------------------------------------------------------------
-| Rutas estaticas para la web
+| Rutas con permisologia
 |--------------------------------------------------------------------------
 */
+Route::get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');

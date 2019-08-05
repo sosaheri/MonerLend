@@ -11,6 +11,13 @@
           <div class="row">
             <div class="col-md-9 col-lg-8 mx-auto">
               <h3 class="login-heading mb-4">Registrate en nuestra comunidad</h3>
+
+                  @if(session()->has('message'))
+                    <div class="alert alert-success">
+                      {{ session()->get('message') }}
+                    </div>
+                  @endif
+
               <form method="POST" action="{{ route('register') }}">
                 @csrf
 
@@ -27,6 +34,18 @@
                             
                 </div>
 
+                <div class="form-label-group">
+                    <input id="username" style="padding:12px;" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" placeholder="Nombre de usuario" autofocus>                      
+                                
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <label style="padding:12px;" for="username" > Nombre de usuario</label>
+
+                            
+                </div>
 
                 <div class="form-label-group">
                   <input type="email" style="padding:12px;" id="email" autocomplete="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Correo Eléctronico" required autofocus>
@@ -36,6 +55,19 @@
                                     </span>
                   @enderror               
                   <label style="padding:12px;" for="email">Correo Eléctronico</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input id="country" style="padding:12px;" type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" required autocomplete="country" placeholder="País de residencia" autofocus>                      
+                                
+                                @error('country')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <label style="padding:12px;" for="country" > País de residencia</label>
+
+                            
                 </div>
 
                 <div class="form-label-group">
