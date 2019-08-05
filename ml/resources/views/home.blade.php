@@ -51,10 +51,28 @@
           </li>
 
                      @guest
- nada
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                           @csrf
+                      </form>
                      @else
+                        <li>
+                          <a  href="{{ route('users.index') }}">
+                            <i class="now-ui-icons arrows-1_minimal-down"></i>  
+                          <p>Gestionar Usuarios</p>  
+                        
+                          </a>
+                        </li>
+
 
                         <li>
+                          <a  href="{{ route('roles.index') }}">
+                            <i class="now-ui-icons arrows-1_minimal-down"></i>  
+                          <p>Gestionar Roles</p>  
+                        
+                          </a>
+                        </li>
+
+                         <li>
                             <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
