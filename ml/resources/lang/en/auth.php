@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Los datos de sus credenciales no coinciden o no están registradas.',
+    'throttle' => 'Demasiados intentos de ingreso pruebe nuevamente en :seconds segundos.',
+    'notactivated' => 'Esta Cuenta no ha sido activada.',
 
 ];

@@ -53,6 +53,7 @@ class RegisterController extends Controller
             return redirect()->back()->with('message', 'Imposible crear usuario.');
         }
         $user->notify(new UserRegisteredSuccessfully($user));
+        $user->assignRole('C');
         return redirect()->back()->with('message', 'Se creo exitosamente tu cuenta. Por favor verifica tu correo eléctronico y activa tu cuenta.');
     }
     /**
@@ -75,7 +76,7 @@ class RegisterController extends Controller
             logger()->error($exception);
             return "Whoops! something went wrong.";
         }
-        return redirect()->to('/');
+        return redirect()->to('/login');
     }
 
     /**
