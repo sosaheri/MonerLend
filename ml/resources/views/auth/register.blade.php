@@ -86,6 +86,16 @@
                              
                   <label style="padding:12px;" for="password-confirm">Confirma la Contraseña</label>
                 </div>                
+                <div class="form-label-group">
+                   <div class="">
+                      {!! NoCaptcha::display() !!}
+                  </div>
+                </div>
+                @if ($errors->has('g-recaptcha-response'))
+                    <span class="help-block text-danger" role="alert">
+                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                    </span>
+                @endif
 
                 <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Registrate</button>
 

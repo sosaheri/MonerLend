@@ -43,6 +43,7 @@ class RegisterController extends Controller
             'username' => 'required|string|min:6',
             'country' => 'required|string',
             'password' => 'required|string|min:6|confirmed',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
         try {
             $validatedData['password']        = bcrypt(array_get($validatedData, 'password'));
