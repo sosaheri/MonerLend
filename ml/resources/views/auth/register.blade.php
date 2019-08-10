@@ -58,15 +58,21 @@
                 </div>
 
                 <div class="form-label-group">
-                    <input id="country" style="padding:12px;" type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" required autocomplete="country" placeholder="País de residencia" autofocus>                      
-                                
+                    <select id="country" style=" border-radius: 25px !important;"  class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" required autocomplete="country" placeholder="País de residencia" autofocus>
+                            @foreach ($paises as $pais)
+
+                                <option value="{{ $pais->id }}">{{ $pais->name }}</option>
+
+                            @endforeach
+                    </select>
+
+                               
                                 @error('country')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <label style="padding:12px;" for="country" > País de residencia</label>
-
+                                
                             
                 </div>
 

@@ -26,7 +26,8 @@
     <!-- Material Kit CSS -->
     <link href="{{ asset('dashboard/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/css/now-ui-dashboard.css') }}" rel="stylesheet" />
-    
+    <link href="{{ asset('dashboard/demo/demo.css') }}" rel="stylesheet">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/monerLend.css') }}" rel="stylesheet">

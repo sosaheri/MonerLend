@@ -1,14 +1,16 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Auth\Events\Registered;
-
 use App\Notifications\UserRegisteredSuccessfully;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Countries;
+
 
 
 class RegisterController extends Controller
@@ -24,7 +26,9 @@ class RegisterController extends Controller
      * Create a new controller instance.
      *
      */
-    public function __construct()
+
+
+     public function __construct()
     {
         $this->middleware('guest');
     }
@@ -36,6 +40,10 @@ class RegisterController extends Controller
      */
     protected function register(Request $request)
     {
+   
+        $cookie = Cookie::get('referral');
+        $referred_by = $cookie ? \Hashids::decode($cookie)[0] : null;
+
         /** @var User $user */
         $validatedData = $request->validate([
             'name'     => 'required|string|max:255',
@@ -49,12 +57,20 @@ class RegisterController extends Controller
             $validatedData['password']        = bcrypt(array_get($validatedData, 'password'));
             $validatedData['activation_code'] = str_random(30).time();
             $user                             = app(User::class)->create($validatedData);
+
+ 
         } catch (\Exception $exception) {
             logger()->error($exception);
             return redirect()->back()->with('message', 'Imposible crear usuario.');
         }
-        $user->notify(new UserRegisteredSuccessfully($user));
+
         $user->assignRole('C');
+        
+
+        $user->notify(new UserRegisteredSuccessfully($user));
+
+        
+
         return redirect()->back()->with('message', 'Se creo exitosamente tu cuenta. Por favor verifica tu correo eléctronico y activa tu cuenta.');
     }
     /**
@@ -64,6 +80,9 @@ class RegisterController extends Controller
      */
     public function activateUser(string $activationCode)
     {
+
+
+
         try {
             $user = app(User::class)->where('activation_code', $activationCode)->first();
             if (!$user) {
@@ -71,6 +90,7 @@ class RegisterController extends Controller
             }
             $user->status          = 1;
             $user->activation_code = null;
+
             $user->save();
             auth()->login($user);
         } catch (\Exception $exception) {
@@ -80,11 +100,6 @@ class RegisterController extends Controller
         return redirect()->to('/login');
     }
 
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
  
 }

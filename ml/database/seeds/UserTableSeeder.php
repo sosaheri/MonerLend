@@ -14,11 +14,12 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->truncate();
         DB::table('users')->insert([
-            'name' => 'Admin',
+            'name' => 'Heriberto Sosa',
             'email' => 'sosaheriberto2001@gmail.com',
             'username' => 'Admin',
             'country' => 'Venezuela',
-            'password' => 'oK28jbHdo28NJLeZguaPefSlsOOsWn1564987127',
+            'password' => bcrypt('venezuela'),
+            'status' => 1,
         ]);
     }
 }

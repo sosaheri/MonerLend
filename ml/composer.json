@@ -12,9 +12,11 @@
         "anhskohbo/no-captcha": "^3.0",
         "caouecs/laravel-lang": "~4.0",
         "fideloper/proxy": "^4.0",
+        "intervention/image": "^2.5",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8",
+        "pragmarx/countries": "^0.6.0",
         "spatie/laravel-permission": "^2.37",
         "vinkla/hashids": "^6.0"
     },
