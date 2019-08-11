@@ -168,6 +168,7 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -233,6 +234,7 @@ return [
         'HTML' => Collective\Html\HtmlFacade::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
 
 
     ],

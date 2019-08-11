@@ -16,6 +16,7 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Heriberto Sosa',
             'email' => 'sosaheriberto2001@gmail.com',
+            'token_mrl' => 0,
             'username' => 'Admin',
             'country' => 'Venezuela',
             'password' => bcrypt('venezuela'),

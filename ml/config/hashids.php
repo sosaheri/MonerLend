@@ -44,7 +44,7 @@ return [
         'main' => [
             //'salt' => 'yGPMa8oZc7PEJXxEnOIAhZscjujizzCPt028vCSG',
             'salt' => str_random(40),
-            'length' => '10',
+            'length' => '6',
         ],
 
         'alternative' => [

@@ -6,7 +6,11 @@
 
 .login,
 .image {
-  /*min-height: 100vh;*/
+  min-height: 100vh;
+}
+
+.image-dashboard {
+  min-height: 10vh;
 }
 
 .bg-image {
@@ -127,4 +131,21 @@
 
 .panel-header.panel-header-lg.panel-header-short {
   height: 50px;
+}
+
+div#social-links {
+  display: flex;
+  justify-content: center;
+}
+
+#social-links ul {
+  padding: 0px;
+  list-style-type: none;
+  display: inline-flex;
+
+}
+
+span.fab.fa-facebook-square, span.fab.fa-twitter, span.fab.fa-whatsapp {
+  font-size: 30px;
+  margin-right: 10px;
 }

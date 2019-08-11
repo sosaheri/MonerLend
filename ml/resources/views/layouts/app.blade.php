@@ -28,6 +28,7 @@
     <link href="{{ asset('dashboard/css/now-ui-dashboard.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/demo/demo.css') }}" rel="stylesheet">
 
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/monerLend.css') }}" rel="stylesheet">
@@ -63,6 +64,9 @@
    <script src=" {{ asset('dashboard/js/plugins/bootstrap-notify.js') }}"></script>
   <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src=" {{ asset('dashboard/demo/demo.js') }}"></script>
+  <!-- share links -->
+  <script src="{{ asset('js/share.js') }}"></script>
+
 
   <script>
     $(document).ready(function() {

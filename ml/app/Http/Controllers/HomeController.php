@@ -28,15 +28,7 @@ class HomeController extends Controller
 
     public function referral()
     {
-        return "<html> 
-        <head> 
-        <title>Redirigir al navegador a otra URL</title> 
-        <META HTTP-EQUIV=\"REFRESH\" CONTENT=\"1;URL=http://localhost:8000/register/?ref=" . \Hashids::encode(auth()->user()->id) . "\">  
-
-        </head> 
-        </html>
-
-        ";
+        return url('/')."/register/?ref=" . \Hashids::encode(auth()->user()->id);
 
 
     }

@@ -94,7 +94,7 @@
           </div>
           <div class="col-md-4">
                       <div class="card card-user">
-                          <div class="image">
+                          <div class="image-dashboard">
                             <img src="{{ asset('img/bgavatar.jpg')  }}" alt="...">
                             
                           </div>
@@ -114,7 +114,15 @@
                               </p>
                             </div>
                             <p class="description text-center">
-                              Enlace para invitar
+
+                            Invita a nuevas personas a registrarse<br>
+
+                            {!! Share::page( url('/')."/register/?ref=" . \Hashids::encode(auth()->user()->id) , 'Unete a nuestra comunidad y Ahorra en Criptomonedas')
+                                ->facebook()
+                                ->twitter()
+                                ->whatsapp(); !!}
+                           
+
                             </p>
                           </div>
                           <hr>
