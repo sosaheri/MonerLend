@@ -58,27 +58,28 @@
                   </div>
                 @endif
 
-            
-                {!! Form::model($user, ['method' => 'PATCH', 'route' => ['profile.update'], 'files' => true ]) !!}
+                <form>
+                {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]], 'files' => true,) !!}
+               
+                {{ Form::open(['route' => ['profile.update'], 'files' => true, 'method' => 'PATCH']) }}
                
                   <div class="row">
                     <div class="col-md-5 pr-1">
                       <div class="form-group">
                         <label>Nombre</label>
-                        
-                        {!! Form::text('name', null, array('placeholder' => 'Nombre','class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        <input type="text" class="form-control" disabled="" placeholder="Nombre" value="{{ $user->name }}">
                       </div>
                     </div>
                     <div class="col-md-3 px-1">
                       <div class="form-group">
                         <label>Usuario</label>
-                         {!! Form::text('username', null, array('placeholder' => 'Usuario','class' => 'form-control')) !!}
+                        <input type="text" class="form-control" disabled="" placeholder="Usuario" value="{{ $user->username }}">
                       </div>
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Correo Eléctronico</label>
-                        {!! Form::text('email', null, array('placeholder' => 'Correo Eléctronico','class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        <input type="email" class="form-control" disabled="" placeholder="{{ $user->email }}">
                       </div>
                     </div>
                   </div>
@@ -86,42 +87,27 @@
                     <div class="col-md-4 pr-1">
                       <div class="form-group">
                         <label>País</label>
-                         {!! Form::text('country', null, array('placeholder' => 'País','class' => 'form-control', 'disabled' => 'disabled')) !!}
+                        <input type="text" class="form-control" disabled="" placeholder="País" value="{{ $user->country }}">
                       </div>
                     </div>
                     <div class="col-md-4 px-1">
                       <div class="form-group">
                         <label> Contraseña</label>
-                        
-                        {!! Form::password('password', array('placeholder' => 'Contraseña','class' => 'form-control')) !!}
+                        <input type="password" class="form-control" >
                       </div>
                     </div>
                     <div class="col-md-4 pl-1">
                       <div class="form-group">
                         <label>Confirme Contraseña</label>
-                        
-                        {!! Form::password('confirm-password', array('placeholder' => 'Confirme Contraseña','class' => 'form-control')) !!}
-       
+                        <input type="password" class="form-control" >
                       </div>
-                    </div>
-                    <div class="col-md-10">
-                      <div class="">
-                        <label>Avatar</label>
-                        <br>
-                        {{ Form::file('avatar') }}
-                      </div>
-                    </div> 
-                    <div class="col-md-2 pl-1">
-                      <div class="form-group right">
-                      
-                           <button type="submit" class="btn btn-primary">Actualizar</button>
-                      
-                      </div>
-                    </div>                                                            
+                    </div>                    
                   </div>
-                
+                  
+                    <p>{{ Form::file('avatar') }}</p>
+                    <p>{{ Form::submit('Update', ['name' => 'submit']) }}</p>
                   {{ Form::close() }}
-             
+                </form>
               </div>
             </div>
           </div>
