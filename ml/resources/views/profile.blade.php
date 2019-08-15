@@ -147,7 +147,7 @@
                               </p>
                             </div>
                             <p class="description text-center">
-                            <?php // auth()->user()->id \Hashids::encode(auth()->user()->id) ?>
+                           
 
                             Invita a nuevas personas a registrarse<br>
 

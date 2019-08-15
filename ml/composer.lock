@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "008c55df7ccec67395e76f9e4051c065",
+    "content-hash": "c89efee3c88b2c54922976b0b0386d04",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -107,6 +107,56 @@
                 "lpm"
             ],
             "time": "2019-03-27T20:34:54+00:00"
+        },
+        {
+            "name": "coingate/coingate-php",
+            "version": "3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coingate/coingate-php.git",
+                "reference": "df2ed981219e38557f88a7569c841cb252bed9c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coingate/coingate-php/zipball/df2ed981219e38557f88a7569c841cb252bed9c0",
+                "reference": "df2ed981219e38557f88a7569c841cb252bed9c0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CoinGate\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CoinGate and contributors",
+                    "homepage": "https://github.com/coingate/coingate-php/graphs/contributors"
+                }
+            ],
+            "description": "CoinGate library for PHP",
+            "homepage": "https://coingate.com",
+            "keywords": [
+                "altcoin",
+                "bitcoin",
+                "coingate",
+                "gateway",
+                "litecoin",
+                "merchant",
+                "payment"
+            ],
+            "time": "2019-02-26T09:46:31+00:00"
         },
         {
             "name": "colinodell/json5",
@@ -4374,9 +4424,9 @@
             "authors": [
                 {
                     "name": "Marcel Pociot",
+                    "role": "Developer",
                     "email": "marcel@beyondco.de",
-                    "homepage": "https://beyondcode.de",
-                    "role": "Developer"
+                    "homepage": "https://beyondcode.de"
                 }
             ],
             "description": "Symfony Var-Dump Server for Laravel",
@@ -4488,8 +4538,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "homepage": "https://github.com/filp",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "https://github.com/filp"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -4817,18 +4867,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "sebastian@phpeople.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpeople.de"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
@@ -6031,8 +6081,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",

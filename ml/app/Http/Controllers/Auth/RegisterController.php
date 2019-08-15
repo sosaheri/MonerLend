@@ -11,10 +11,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Countries;
 use DB;
-
-
-
-
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -39,9 +37,6 @@ class RegisterController extends Controller
 
     public static function token_mrl(int $id, string $tipo_token)
     {
-
- 
-        //$user = User::where('id',$id) -> first();
         $user = DB::table('users')->whereId($id)->first();
         
         if($tipo_token == "referral"){
@@ -62,8 +57,6 @@ class RegisterController extends Controller
      */
     protected function register(Request $request)
     {
-   
-
         /** @var User $user */
         $validatedData = $request->validate([
             'name'     => 'required|string|max:255',
@@ -79,7 +72,6 @@ class RegisterController extends Controller
             $user                             = app(User::class)->create($validatedData);
             $user->assignRole('C');
             
- 
         } catch (\Exception $exception) {
             logger()->error($exception);
             return redirect()->back()->with('message', 'Imposible crear usuario.');
@@ -117,6 +109,9 @@ class RegisterController extends Controller
             $user->referred_by = $referred_by;
             $user->token_mrl = 0;
             $user->save();
+
+            Mail::to($user->email)->send(new WelcomeMail($user));
+            
             auth()->login($user);
         } catch (\Exception $exception) {
             logger()->error($exception);
@@ -125,6 +120,7 @@ class RegisterController extends Controller
             $referred_by = \Hashids::decode($cookie)[0];
 
             RegisterController::token_mrl( $referred_by , 'referral');
+
             return redirect()->to('/login');
     }
 

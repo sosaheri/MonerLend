@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -16,9 +17,11 @@ class WelcomeMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -28,6 +31,8 @@ class WelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('emails.welcome', ['user' => $this->user]  )
+                ->from('no-reply@monerlend.com')
+                ->subject('¡Bienvenido a Monerlend!');
     }
 }
