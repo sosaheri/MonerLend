@@ -31,7 +31,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/monerLend.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/monerlend.css') }}" rel="stylesheet">
     
     <!-- código para recapcha -->
     {!! NoCaptcha::renderJs() !!}
