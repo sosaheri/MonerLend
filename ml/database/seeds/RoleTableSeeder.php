@@ -15,14 +15,15 @@ class RoleTableSeeder extends Seeder
         $roles = [
             'Administrador',
             'Operador',
+            'D',
+            'D-',
             'C',
             'C+',
             'B',
             'B+',
             'A',
             'A+',
-            'D',
-            'D-',
+
          ];
  
  

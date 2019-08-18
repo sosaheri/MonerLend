@@ -33,6 +33,18 @@
                 </a>
               </li>
               <li>
+                <a href="{{ url('/estadisticasRegistrados') }}">
+                  <i class="now-ui-icons users_single-02"></i>
+                  <p>Estadisticas registrados</p>
+                </a>
+              </li> 
+              <li>
+                <a href="{{ url('/estadisticasRanking') }}">
+                  <i class="now-ui-icons users_single-02"></i>
+                  <p>Estadisticas ranking</p>
+                </a>
+              </li>                              
+              <li>
                 <a href="{{ url('/logout') }}">
                   <i class="now-ui-icons users_single-02"></i>
                   <p>Salir</p>
