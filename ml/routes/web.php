@@ -46,10 +46,6 @@ Route::get('/estadisticasRanking', 'EstadisticasController@ranking');
 Route::get('/profile', 'UserProfileController@show')->middleware('auth')->name('profile.show');
 Route::patch('/profile', 'UserProfileController@update')->middleware('auth')->name('profile.update');
 
-// Route::get('/cookie', function () {
-//     return Cookie::get('referral');
-// });
-
 Route::get('/referral-link', 'HomeController@referral');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
