@@ -21,32 +21,53 @@
 
               <li>
                 <a href="{{ url('/profile') }}">
-                  <i class="now-ui-icons users_single-02"></i>
+                  <i class="now-ui-icons loader_gear"></i>
                   <p>Perfil de usuario</p>
                 </a>
               </li> 
-
+@role('Administrador')
               <li>
                 <a href="{{ url('/users') }}">
                   <i class="now-ui-icons users_single-02"></i>
                   <p>Gestión de Usuarios</p>
                 </a>
               </li>
-              <li>
-                <a href="{{ url('/estadisticasRegistrados') }}">
-                  <i class="now-ui-icons users_single-02"></i>
-                  <p>Estadisticas registrados</p>
-                </a>
-              </li> 
-              <li>
-                <a href="{{ url('/estadisticasRanking') }}">
-                  <i class="now-ui-icons users_single-02"></i>
-                  <p>Estadisticas ranking</p>
-                </a>
-              </li>                              
+<!-- . -->
+<li>
+        <a class="nav-link collapsed" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
+        <i class="now-ui-icons business_chart-bar-32"></i>
+         <p>Estadisticas
+            <b class="caret"></b>
+          </p>
+        </a>
+
+        <div class="collapse" id="laravelExample" style="">
+
+          <ul class="nav">
+
+          <li>
+                      <a href="{{ url('/estadisticasRegistrados') }}">
+                        <i class="now-ui-icons gestures_tap-01"></i>
+                        <p>Estadisticas registrados</p>
+                      </a>
+                  </li>
+
+                  <li>
+                    <a href="{{ url('/estadisticasRanking') }}">
+                      <i class="now-ui-icons objects_diamond"></i>
+                      <p>Estadisticas ranking</p>
+                    </a>
+                  </li> 
+
+          </ul>
+        </div>
+      </li>
+
+@endrole
+<!-- . -->
               <li>
                 <a href="{{ url('/logout') }}">
-                  <i class="now-ui-icons users_single-02"></i>
+                  <i class="now-ui-icons media-1_button-power"></i>
                   <p>Salir</p>
                 </a>
               </li>              
