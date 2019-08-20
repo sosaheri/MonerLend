@@ -59,5 +59,24 @@ Route::get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name(
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');
     Route::resource('users','UserController');
-    //Route::resource('products','ProductController');
+    
 });
+
+/*
+|--------------------------------------------------------------------------
+| Transacciones con permisologia
+|--------------------------------------------------------------------------
+*/
+
+Route::get('depositos', function () {
+    return view('transacciones.depositos');
+});
+
+//Route::get('/cart','CartController@show');
+//Route::get('/cart/{id}/add','CartController@add');
+//Route::get('/cart/destroy','CartController@destroy');
+
+//Route::get('/transacciones.depositos','CartController@getCheckout');
+Route::post('depositos','CartController@CoinGate');
+Route::post('/cart/callback', 'CartController@callback');
+Route::get('/myorders', 'CartController@myOrders');

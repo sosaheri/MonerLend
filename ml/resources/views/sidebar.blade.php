@@ -25,6 +25,33 @@
                   <p>Perfil de usuario</p>
                 </a>
               </li> 
+
+              <li>
+        <a class="nav-link collapsed" data-toggle="collapse" href="#transacciones" aria-expanded="false">
+        <i class="now-ui-icons business_money-coins"></i>
+         <p>Transacciones
+            <b class="caret"></b>
+          </p>
+        </a>
+
+        <div class="collapse" id="transacciones" style="">
+
+          <ul class="nav">
+
+          <li>
+                      <a href="{{ url('/depositos') }}">
+                        <i class="now-ui-icons shopping_credit-card"></i>
+                        <p>Depositos</p>
+                      </a>
+                  </li>
+
+
+
+          </ul>
+        </div>
+      </li>
+
+
 @role('Administrador')
               <li>
                 <a href="{{ url('/users') }}">
