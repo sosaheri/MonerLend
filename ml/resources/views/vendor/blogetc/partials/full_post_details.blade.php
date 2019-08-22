@@ -1,6 +1,6 @@
 @if(\Auth::check() && \Auth::user()->canManageBlogEtcPosts())
-    <a href="{{$post->edit_url()}}" class="btn btn-outline-secondary btn-sm pull-right float-right">Edit
-        Post</a>
+    <a href="{{$post->edit_url()}}" class="btn btn-outline-secondary btn-sm pull-right float-right">Editar
+        Publicación</a>
 @endif
 
 <h2 class='blog_title'>{{$post->title}}</h2>
@@ -23,7 +23,7 @@
 
 <hr/>
 
-Posted <strong>{{$post->posted_at->diffForHumans()}}</strong>
+Publicado <strong>{{$post->posted_at->diffForHumans()}}</strong>
 
 @includeWhen($post->author,"blogetc::partials.author",['post'=>$post])
 @includeWhen($post->categories,"blogetc::partials.categories",['post'=>$post])

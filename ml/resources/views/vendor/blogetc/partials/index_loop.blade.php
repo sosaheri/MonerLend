@@ -14,7 +14,7 @@
     <p>{!! $post->generate_introduction(400) !!}</p>
 
     <div class='text-center'>
-        <a href="{{$post->url()}}" class="btn btn-primary">View Post</a>
+        <a href="{{$post->url()}}" class="btn btn-primary">Ver Publicación</a>
     </div>
         </div>
 </div>

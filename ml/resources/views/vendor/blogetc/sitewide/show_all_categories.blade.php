@@ -1,4 +1,4 @@
-<h5>Post Categories</h5>
+<h5>Categorias de las publicaciones</h5>
 <ul class="nav">
     @foreach(\WebDevEtc\BlogEtc\Models\BlogEtcCategory::orderBy("category_name")->limit(200)->get() as $category)
         <li class="nav-item">

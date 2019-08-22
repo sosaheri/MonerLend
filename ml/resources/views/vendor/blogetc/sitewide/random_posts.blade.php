@@ -1,4 +1,4 @@
-<h5>Random Posts</h5>
+<h5>Publicaciones aleatorias</h5>
 <ul class="nav">
     @foreach(\WebDevEtc\BlogEtc\Models\BlogEtcPost::inRandomOrder()->limit(5)->get() as $post)
         <li class="nav-item">

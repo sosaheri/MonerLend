@@ -1,4 +1,4 @@
-<h5>Recent Posts</h5>
+<h5>Publicaciones Recientes</h5>
 <ul class="nav">
     @foreach(\WebDevEtc\BlogEtc\Models\BlogEtcPost::orderBy("posted_at","desc")->limit(5)->get() as $post)
         <li class="nav-item">

@@ -1,1 +1,1 @@
-by <strong>{{$post->author->name}}</strong>
+por <strong>{{$post->author->name}}</strong>

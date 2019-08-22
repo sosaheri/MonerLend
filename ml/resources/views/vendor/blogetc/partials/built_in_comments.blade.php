@@ -22,12 +22,11 @@
 
 
 @empty
-    <div class='alert alert-info'>No comments yet! Why don't you be the first?</div>
+    <div class='alert alert-info'>No hay comentarios¿Quieres agregar el primero?</div>
 @endforelse
 
 @if(count($comments)> config("blogetc.comments.max_num_of_comments_to_show",500) - 1)
-    <p><em>Only the first {{config("blogetc.comments.max_num_of_comments_to_show",500)}} comments are
-            shown.</em>
+    <p><em>Solo se muestran los primeros {{config("blogetc.comments.max_num_of_comments_to_show",500)}} comentarios.</em>
     </p>
 @endif
 

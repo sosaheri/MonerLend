@@ -6,8 +6,8 @@ return [
 
     'include_default_routes' => true, // set to false to not include routes.php for BlogEtcReaderController and admin related routes. Default: true. If you disable this, you will have to manually copy over the data from routes.php and add it to your web.php.
 
-    'blog_prefix' => "blog", // used in routes.php. If you want to your http://yoursite.com/latest-news (or anything else), then enter that here. Default: blog
-    'admin_prefix' => "blog_admin", // similar to above, but used for the admin panel for the blog. Default: blog_admin
+    'blog_prefix' => "noticias", // used in routes.php. If you want to your http://yoursite.com/latest-news (or anything else), then enter that here. Default: blog
+    'admin_prefix' => "noticias_admin", // similar to above, but used for the admin panel for the blog. Default: blog_admin
 
     'use_custom_view_files' => false, // set to false to disable the use of being able to make blog posts include a view from resources/views/custom_blog_posts/*.blade.php. Default: false. Set to true to use this feature. Default: false
 
@@ -61,7 +61,7 @@ return [
             'w' => 1000, // width in pixels
             'h' => 700, //height
             'basic_key' => "large", // same as the main key, but WITHOUT 'image_'.
-            'name' => "Large", // description, used in the admin panel
+            'name' => "Grande", // description, used in the admin panel
             'enabled' => true, // see note above
             'crop' => true, // if true then we will crop and resize to exactly w/h. If false then it will maintain proportions, with a max width of 'w' and max height of 'h'
         ],
@@ -69,7 +69,7 @@ return [
             'w' => 600, // width in pixels
             'h' => 400, //height
             'basic_key' => "medium",// same as the main key, but WITHOUT 'image_'.
-            'name' => "Medium",// description, used in the admin panel
+            'name' => "Mediana",// description, used in the admin panel
             'enabled' => true, // see note above
             'crop' => true, // if true then we will crop and resize to exactly w/h. If false then it will maintain proportions, with a max width of 'w' and max height of 'h'. If you use these images as part of your website template then you should probably have this to true.
         ],
@@ -77,7 +77,7 @@ return [
             'w' => 150, // width in pixels
             'h' => 150, //height
             'basic_key' => "thumbnail",// same as the main key, but WITHOUT 'image_'.
-            'name' => "Thumbnail",// description, used in the admin panel
+            'name' => "Pequeña",// description, used in the admin panel
             'enabled' => true, // see note above
         ],
 
@@ -107,7 +107,7 @@ return [
 
 
     'captcha' => [
-        'captcha_enabled' => true, // true = we should use a captcha, false = turn it off. If comments are disabled this makes no difference.
+        'captcha_enabled' => false, // true = we should use a captcha, false = turn it off. If comments are disabled this makes no difference.
         'captcha_type' => \WebDevEtc\BlogEtc\Captcha\Basic::class, // this should be a class that implements the \WebDevEtc\BlogEtc\Interfaces\CaptchaInterface interface
         'basic_question' => "What is the opposite of white?", // a simple captcha question to always ask (if captcha_type is set to 'basic'
         'basic_answers' => "black,dark", // comma separated list of possible answers. Don't worry about case.
@@ -117,7 +117,7 @@ return [
 
     'rssfeed' => [
 
-        'should_shorten_text' => true, // boolean. Default: true. Should we shorten the text in rss feed?
+        'should_shorten_text' => false, // boolean. Default: true. Should we shorten the text in rss feed?
         'text_limit' => 100, // max length of description text in the rss feed
         'posts_to_show_in_rss_feed' => 10,  // how many posts should we show in the rss feed
         'cache_in_minutes' => 60, // how long (in minutes) to cache the RSS blog feed for.
@@ -152,9 +152,9 @@ return [
 
         'user_field_for_author_name' => "name", // what field on your User model should we use when echoing out the author name? By default this should be 'name', but maybe you have it set up to use 'username' etc.
 
-        'ask_for_author_email' => true, // show 'author email' on the form ?
+        'ask_for_author_email' => false, // show 'author email' on the form ?
         'require_author_email' => false, // require an email (make sure ask_for_author_email is true if you want to use this)
-        'ask_for_author_website' => true, // show 'author website' on the form, show the link when viewing the comment
+        'ask_for_author_website' => false, // show 'author website' on the form, show the link when viewing the comment
 
         'disqus' => [
 
@@ -170,7 +170,7 @@ return [
 
 
     'search' => [
-        'search_enabled' => false, // is search enabled? By default this is disabled, but you can easily turn it on.
+        'search_enabled' => true, // is search enabled? By default this is disabled, but you can easily turn it on.
     ],
 
 

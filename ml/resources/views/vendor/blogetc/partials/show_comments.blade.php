@@ -26,7 +26,7 @@ return;  // not required, as we already filter for this
 
 @default
 {{--uh oh! we have an error!--}}
-<div class='alert alert-danger'>Invalid comment <code>type_of_comments_to_show</code> config option</div>";
+<div class='alert alert-danger'>Comentario invalido <code>tipo_de_comentario_a_mostrar</code> en opciones de configuración</div>";
 @endswitch
 
 
