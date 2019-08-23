@@ -79,4 +79,5 @@ Route::get('depositos', function () {
 //Route::get('/transacciones.depositos','CartController@getCheckout');
 Route::post('depositos','CartController@CoinGate');
 Route::post('/cart/callback', 'CartController@callback');
+Route::get('/cart/callback', 'CartController@callback');
 Route::get('/myorders', 'CartController@myOrders');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use CoinGate\CoinGate;
@@ -9,6 +10,8 @@ use CoinGate\CoinGate;
 use Session;
 use App\Order;
 use App\Cart;
+use App\Transacciones;
+
 //use App\Product;
 
 class CartController extends Controller
@@ -97,10 +100,20 @@ class CartController extends Controller
             'coingate_invoice_id' => $coingate_invoice_id,
             'token' => $token,
             'amount' => request('monto'),
-            'status' => 'unpaid'
+            'status' => 'send'
       
         ]);
   
+
+        $transaccion = Transacciones::create([
+      
+          'order_id'   => $o->id,
+          'type'       => 'deposito',
+          'amount'     => request('monto'),
+          'currency'   => $currency,
+    
+      ]);
+      
         //Post parameters , which are send to CoinGate
   
         $post_params = array(
@@ -136,23 +149,22 @@ class CartController extends Controller
       }
   
       public function callback(Request $request) {
-  
+                
                 $order = Order::find($request->input('order_id'));
-        
+
                 if ($request->input('token') == $order->token) {
         
                     $status = NULL;
         
                     if ($request->input('status') == 'paid') {
         
-                    if ($request->input('price') >= $order->total_price) {
+                        if ($request->input('price') >= $order->total_price) {
+            
+                            $status = 'paid';
+            
+                        }
         
-                        $status = 'paid';
-        
-                    }
-        
-                    }
-        
+                    }      
                     else {
         
                     $status = $request->input('status');
@@ -175,7 +187,7 @@ class CartController extends Controller
   
           $myOrders = Order::get()->where('user_id',$user_id);
   
-          return view('myOrders.myOrders',compact('myOrders'));
+          return view('transacciones.myorders',compact('myOrders'));
   
       }
 }

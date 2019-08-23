@@ -44,64 +44,14 @@
                       <div class="card  card-tasks">
                         <div class="card-header ">
                           
-                          <h4 class="card-title">Últimas noticias</h4>
+                          
                         </div>
                         <div class="card-body ">
                           <div class="table-full-width table-responsive">
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    <div class="form-check">
-                                     
-                                    </div>
-                                  </td>
-                                  <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                                  <td class="td-actions text-right">
-                                   
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <div class="form-check">
-                                      <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox">
-                                        <span class="form-check-sign"></span>
-                                      </label>
-                                    </div>
-                                  </td>
-                                  <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                  <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                                      <i class="now-ui-icons ui-2_settings-90"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                                      <i class="now-ui-icons ui-1_simple-remove"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <div class="form-check">
-                                      <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                        <span class="form-check-sign"></span>
-                                      </label>
-                                    </div>
-                                  </td>
-                                  <td class="text-left">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                  </td>
-                                  <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                                      <i class="now-ui-icons ui-2_settings-90"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                                      <i class="now-ui-icons ui-1_simple-remove"></i>
-                                    </button>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
+
+                          @include('blogetc::sitewide.recent_posts')
+
+
                           </div>
                         </div>
                         <div class="card-footer ">
@@ -143,6 +93,31 @@
                                 ->whatsapp(); !!}
                                 
                             </p>
+
+                            <p class="description text-center">Ahorros disponilbes en MonerLend:</p>
+
+
+</p>
+
+<p class="description text-center">
+  <?php $otra = date("Y-m-d");
+        $fecha_actual = new Datetime("now"); 
+        $fecha_registro = new Datetime(Auth::user()->mrl_counter);
+        $intervalo = $fecha_registro->diff($fecha_actual);
+        $count = $intervalo->m * 30 + $intervalo->d + 1;
+  
+  ?>
+      Tokens MRL disponibles: <label class="badge ">{{ Auth::user()->token_mrl }}</label> <br> 
+      @if (Auth::user()->getRoleNames()=='["C"]')
+            @if( $count >= 90 )
+            <button type="submit" class="btn btn-primary">Retirar MRL</button>
+            @else
+                                                                                
+            @endif
+
+      @endif
+
+  </p>
                           </div>
                           <hr>
 

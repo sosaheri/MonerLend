@@ -156,8 +156,31 @@
                                 ->twitter()
                                 ->whatsapp(); !!}
                            
+                            <p class="description text-center">Ahorros disponilbes en MonerLend:</p>
+
 
                             </p>
+                            
+                            <p class="description text-center">
+                              <?php $otra = date("Y-m-d");
+                                    $fecha_actual = new Datetime("now"); 
+                                    $fecha_registro = new Datetime(Auth::user()->mrl_counter);
+                                    $intervalo = $fecha_registro->diff($fecha_actual);
+                                    $count = $intervalo->m * 30 + $intervalo->d + 1;
+                              
+                              ?>
+                                  Tokens MRL disponibles: <label class="badge ">{{ Auth::user()->token_mrl }}</label> <br> 
+                                  @if (Auth::user()->getRoleNames()=='["C"]')
+                                        @if( $count >= 90 )
+                                        <button type="submit" class="btn btn-primary">Retirar MRL</button>
+                                        @else
+                                                                                                            
+                                        @endif
+
+                                  @endif
+
+                              </p>
+                            
                           </div>
                           <hr>
 
