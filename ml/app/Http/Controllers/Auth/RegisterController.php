@@ -13,6 +13,7 @@ use Countries;
 use DB;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
+use Hashids\Hashids;
 
 class RegisterController extends Controller
 {
@@ -103,8 +104,10 @@ class RegisterController extends Controller
             }
             $user->status          = 1;
             $user->activation_code = null;
-
+            //$hash = new Hashids('yGPMa8oZc7PEJXxEnOIAhZscjujizzCPt028vCSG');
             $referred_by = \Hashids::decode($cookie)[0];
+           // dd($referred_by = $hash->decode($cookie)[0]);
+        
 
             $user->referred_by = $referred_by;
             $user->token_mrl = 0;

@@ -41,7 +41,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 
 Route::get('/estadisticasRegistrados', 'EstadisticasController@registrados');
 Route::get('/estadisticasRanking', 'EstadisticasController@ranking');
-
+Route::get('/estadisticasTransacciones', 'EstadisticasController@transacciones');
+Route::get('/ultimosDepositos', 'EstadisticasController@ultimosDepositos');
 
 Route::get('/profile', 'UserProfileController@show')->middleware('auth')->name('profile.show');
 Route::patch('/profile', 'UserProfileController@update')->middleware('auth')->name('profile.update');

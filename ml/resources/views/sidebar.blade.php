@@ -70,6 +70,13 @@
                   <p>Gestión de Usuarios</p>
                 </a>
               </li>
+
+              <li class="@if(\Request::route()->getName() === '/estadisticasTransacciones') active @endif ">
+                                  <a href="{{ url('/estadisticasTransacciones') }}">
+                                    <i class="now-ui-icons shopping_bag-16"></i>
+                                    <p>Transacciones de Usuarios</p>
+                                  </a>
+                                </li> 
               <!-- . -->
               <li>
                       <a class="nav-link collapsed" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
@@ -96,6 +103,12 @@
                                     <p>Estadisticas ranking</p>
                                   </a>
                                 </li> 
+                                <li class="@if(\Request::route()->getName() === '/ultimosDepositos') active @endif ">
+                                  <a href="{{ url('/ultimosDepositos') }}">
+                                    <i class="now-ui-icons shopping_bag-16"></i>
+                                    <p>Últimos depositos de ahorro</p>
+                                  </a>
+                                </li>                               
 
                         </ul>
                       </div>

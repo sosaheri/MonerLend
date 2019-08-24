@@ -114,7 +114,7 @@
                     <div class="col-md-6">
                         <div class="card card-user">
                         <div class="container"> 
-        <form action="/depositos" method="post"> 
+        <form action="{{ url('/depositos') }}" method="post"> 
             <div class="form-group"> 
                 <label for="email">Correo Electronico:</label> 
                 <input type="email" class="form-control"

@@ -10,6 +10,7 @@ use App\User;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
+use Transacciones;
 
 
 class EstadisticasController extends Controller
@@ -39,6 +40,42 @@ class EstadisticasController extends Controller
         return view('estadisticas.UsuariosRanking',compact('ranking'));
     }
 
+    public function transacciones(Request $request)
+    {
 
+        
+
+        $transacciones = DB::table('users')->select('users.name', 'transacciones.type' ,'orders.amount', 'transacciones.currency', 'orders.created_at')
+                        ->join('orders', function ($join){
+                            $join->on('users.id', '=', 'orders.user_id');
+                        })
+                        ->join('transacciones', function ($join){
+                            $join->on('orders.id', '=', 'transacciones.order_id');
+                        })->get();
+                        //->where('roles.name', '!=', 'Administrador')->where('roles.name', '!=', 'Operador')->orderBy('roles.id', 'desc')
+                        
+       // $transacciones = Transacciones::all()->paginate(10);
+
+        return view('estadisticas.UsuariosTransacciones',compact('transacciones'))
+        ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+    public function ultimosDepositos(Request $request)
+    {
+
+        
+
+        $ultDepositos = DB::table('users')->select('users.name', 'transacciones.type' ,'orders.amount', 'transacciones.currency', 'orders.created_at')
+                        ->join('orders', function ($join){
+                            $join->on('users.id', '=', 'orders.user_id');
+                        })
+                        ->join('transacciones', function ($join){
+                            $join->on('orders.id', '=', 'transacciones.order_id');
+                        })->where('transacciones.type', '=', 'deposito')->get();
+       // $transacciones = Transacciones::all()->paginate(10);
+
+        return view('estadisticas.UltimosDepositos',compact('ultDepositos'))
+        ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
     
 }
