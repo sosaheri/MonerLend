@@ -38,7 +38,6 @@ Route::get('privacidad', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
-
 Route::get('/estadisticasRegistrados', 'EstadisticasController@registrados');
 Route::get('/estadisticasRanking', 'EstadisticasController@ranking');
 Route::get('/estadisticasTransacciones', 'EstadisticasController@transacciones');

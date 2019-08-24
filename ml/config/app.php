@@ -180,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\DynamicCountriesList::class,
+        App\Providers\MonerlendServiceProvider::class,
     ],
 
     /*
@@ -235,6 +236,7 @@ return [
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
+        'Monerlend' => App\Helpers\Monerlend::class,
 
 
     ],
