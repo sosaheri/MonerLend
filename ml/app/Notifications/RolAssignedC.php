@@ -1,28 +1,26 @@
 <?php
+
 namespace App\Notifications;
+
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-
-class UserRegisteredSuccessfully extends Notification
+class RolAssignedC extends Notification
 {
     use Queueable;
-    /**
-     * @var User
-     */
-    protected $user;
+
     /**
      * Create a new notification instance.
      *
-     * @param User $user
+     * @return void
      */
-     public function __construct(User $user)
-     {
-         $this->user = $user;
-     }
-
+    public function __construct()
+    {
+        // $this->user = $user;
+    }
 
     /**
      * Get the notification's delivery channels.
@@ -34,6 +32,7 @@ class UserRegisteredSuccessfully extends Notification
     {
         return ['mail'];
     }
+
     /**
      * Get the mail representation of the notification.
      *
@@ -42,18 +41,18 @@ class UserRegisteredSuccessfully extends Notification
      */
     public function toMail($notifiable)
     {
-        /** @var User $user */
-        $user = $this->user;
         return (new MailMessage)
-            //->from(env('ADMIN_MAIL'))
-            ->from('info@monerlend.com')
-            ->subject('Creo su cuenta exitosamente')
-            ->greeting(sprintf('Hola %s', $user->name))
-            //->greeting('Hola')
-            ->line('Te has registrado exitosamente en nuestro sistema. Por favor activa tu cuenta.')
-            ->action('Haz Click aquí', route('activate.user', $user->activation_code))
-            ->line('Gracias por unirte a nuestra comunidad!');
+                    ->subject('Nuevo rango de usuario en Monerlend')
+                    ->greeting('Felicitaciones')
+                    ->line('Has obtenido un nuevo rango en Monerlend por activar tu cuenta.')
+                    ->line('')
+                    ->line('A partir de Ahora eres del rango C')
+                    ->line('')
+                    ->line('Con este rango iniciamos nuestra relacion, podras ahorrar y ganar dinero mientras lo haces')                    
+                    //->action('Notification Action', url('/'))
+                    ->line('Gracias por usar nuestra aplicacion y pertenercer a la comunidad');
     }
+
     /**
      * Get the array representation of the notification.
      *

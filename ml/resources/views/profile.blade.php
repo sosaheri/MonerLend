@@ -151,7 +151,7 @@
 
                             Invita a nuevas personas a registrarse<br>
 
-                            {!! Share::page( url('/')."/register/?ref=" . \Hashids::encode(auth()->user()->id) , 'Unete a nuestra comunidad y Ahorra en Criptomonedas')
+                            {!! Share::page( url('/')."/register/?ref=" . auth()->user()->id , 'Unete a nuestra comunidad y Ahorra en Criptomonedas')
                                 ->facebook()
                                 ->twitter()
                                 ->whatsapp(); !!}

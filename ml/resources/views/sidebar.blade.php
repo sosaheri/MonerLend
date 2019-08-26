@@ -29,7 +29,7 @@
               <li class=" @if(\Request::route()->getName() === 'depositos') active @endif ">
                   <a class="nav-link collapsed" data-toggle="collapse" href="#transacciones" aria-expanded="false">
                       <i class="now-ui-icons business_money-coins"></i>
-                      <p>Transacciones
+                      <p>Operaciones
                           <b class="caret"></b>
                         </p>
                   </a>
@@ -38,15 +38,31 @@
 
                     <ul class="nav">
 
-                    <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
+                            <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
                                 <a href="{{ url('/depositos') }}">
                                   <i class="now-ui-icons shopping_credit-card"></i>
-                                  <p>Depositos</p>
+                                  <p>Ahorros y Pagos</p>
                                 </a>
                             </li>
 
-
-
+                            <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
+                                <a href="{{ url('/retiros') }}">
+                                  <i class="now-ui-icons shopping_credit-card"></i>
+                                  <p>Retiros</p>
+                                </a>
+                            </li>
+                            <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
+                                <a href="{{ url('/prestamos') }}">
+                                  <i class="now-ui-icons shopping_credit-card"></i>
+                                  <p>Prestamos</p>
+                                </a>
+                            </li>                            
+                            <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
+                                <a href="{{ url('/creditos') }}">
+                                  <i class="now-ui-icons shopping_credit-card"></i>
+                                  <p>Creditos</p>
+                                </a>
+                            </li> 
                     </ul>
                   </div>
               </li>

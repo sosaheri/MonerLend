@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Auth\Events\Registered;
 use App\Notifications\UserRegisteredSuccessfully;
+use App\Notifications\RolAssignedC;
+use App\Notifications\Bienvenida;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -82,7 +84,7 @@ class RegisterController extends Controller
         
 
         $user->notify(new UserRegisteredSuccessfully($user));
-        
+
         
 
         return redirect()->back()->with('message', 'Se creo exitosamente tu cuenta. Por favor verifica tu correo eléctronico y activa tu cuenta.');
@@ -105,24 +107,30 @@ class RegisterController extends Controller
             $user->status          = 1;
             $user->activation_code = null;
             //$hash = new Hashids('yGPMa8oZc7PEJXxEnOIAhZscjujizzCPt028vCSG');
-            $referred_by = \Hashids::decode($cookie)[0];
-           // dd($referred_by = $hash->decode($cookie)[0]);
+            //$referred_by = \Hashids::decode($cookie)[0];
+
         
 
-            $user->referred_by = $referred_by;
+            $user->referred_by = $cookie;
             $user->token_mrl = 0;
+            $user->notify(new RolAssignedC());
+
+            $arr = [ 'user' => "user" ];
+
+            $user->notify(new Bienvenida());
             $user->save();
 
-            Mail::to($user->email)->send(new WelcomeMail($user));
             
+
+
             auth()->login($user);
         } catch (\Exception $exception) {
             logger()->error($exception);
             return "Whoops! something went wrong.".$exception;
         }
-            $referred_by = \Hashids::decode($cookie)[0];
+            $referred_by = $cookie;//\Hashids::decode($cookie)[0];
 
-            RegisterController::token_mrl( $referred_by , 'referral');
+            RegisterController::token_mrl( $cookie , 'referral');
 
             return redirect()->to('/login');
     }
