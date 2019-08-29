@@ -38,7 +38,7 @@ class RegisterController extends Controller
     }
 
 
-    public static function token_mrl(int $id, string $tipo_token)
+    public static function token_mrl($id = 0, $tipo_token = '', $tokens = 0)
     {
         $user = DB::table('users')->whereId($id)->first();
         
@@ -49,6 +49,8 @@ class RegisterController extends Controller
         }else{
             DB::table('users')->whereId($id)->update(['token_mrl' => $user->token_mrl ]);
         }
+
+        DB::table('users')->whereId($id)->update(['token_mrl' => $user->token_mrl + $tokens ]);
        
     }
 

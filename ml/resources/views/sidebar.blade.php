@@ -14,72 +14,75 @@
            
               <li class=" @if(\Request::route()->getName() === 'home') active @endif ">
                 <a href="{{ url('/home') }}">
-                  <i class="now-ui-icons design_app"></i>
+                <i class="fas fa-columns"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
 
               <li class=" @if(\Request::route()->getName() === 'profile.show') active @endif ">
                 <a href="{{ url('/profile') }}">
-                  <i class="now-ui-icons loader_gear"></i>
+                  <i class="fas fa-users-cog"></i>
                   <p>Perfil de usuario</p>
                 </a>
               </li> 
 
-              <li class=" @if(\Request::route()->getName() === 'depositos') active @endif ">
-                  <a class="nav-link collapsed" data-toggle="collapse" href="#transacciones" aria-expanded="false">
-                      <i class="now-ui-icons business_money-coins"></i>
-                      <p>Operaciones
-                          <b class="caret"></b>
-                        </p>
-                  </a>
+              <li class=" @if(\Request::route()->getName() === 'profile.amigos') active @endif ">
+                <a href="{{ url('/amigos') }}">
+                  <i class="fas fa-users"></i>
+                  <p>Amigos</p>
+                </a>
+              </li>
 
-                  <div class="collapse" id="transacciones" style="">
+              <li class="@if(\Request::route()->getName() === 'estadisticas.misTransacciones') active @endif ">
+                                  <a href="{{ url('/misTransacciones') }}">
+                                  <i class="fab fa-stack-overflow"></i>
+                                    <p>Mis Transacciones</p>
+                                  </a>
+              </li>                 
 
-                    <ul class="nav">
+                         
+                            <li class=" @if(\Request::route()->getName() === 'transacciones.financiamiento') active @endif ">
+                                <a href="{{ url('/listadoFinanciamiento') }}">
+                                <i class="fas fa-donate"></i>
+                                  <p>Peticiones de Financiamientos</p>
+                                </a>
+                            </li>
 
                             <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
                                 <a href="{{ url('/depositos') }}">
-                                  <i class="now-ui-icons shopping_credit-card"></i>
-                                  <p>Ahorros y Pagos</p>
+                                <i class="fas fa-file-invoice-dollar"></i>
+                                  <p>Realizar Pagos o Ahorros</p>
                                 </a>
                             </li>
 
                             <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
                                 <a href="{{ url('/retiros') }}">
-                                  <i class="now-ui-icons shopping_credit-card"></i>
+                                <i class="fas fa-cash-register"></i>
                                   <p>Retiros</p>
                                 </a>
                             </li>
                             <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
                                 <a href="{{ url('/prestamos') }}">
-                                  <i class="now-ui-icons shopping_credit-card"></i>
-                                  <p>Prestamos</p>
+                                <i class="fas fa-hand-holding-usd"></i>
+                                  <p>Solicitar Prestamos</p>
                                 </a>
                             </li>                            
-                            <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
-                                <a href="{{ url('/creditos') }}">
-                                  <i class="now-ui-icons shopping_credit-card"></i>
-                                  <p>Creditos</p>
-                                </a>
-                            </li> 
-                    </ul>
-                  </div>
-              </li>
+
+    
 
               <li class=" @if(\Request::route()->getName() === 'noticias') active @endif ">
                @role('Administrador') 
-                <a href="{{ url('/noticias_admin') }}" >
+                      <a href="{{ url('/noticias_admin') }}" >
                 
-               @else
-               <a href="{{ url('/noticias') }}" >
+                   @else
+                      <a href="{{ url('/noticias') }}" >
                @endrole 
-                  <i class="now-ui-icons files_single-copy-04"></i>
+               <i class="far fa-newspaper"></i>
                   <p>Noticias</p>
                 </a>
               </li>
 
-              @role('Administrador')
+      @role('Administrador')
               <li class=" @if(\Request::route()->getName() === 'users.index') active @endif ">
                 <a href="{{ url('/users') }}" >
                   <i class="now-ui-icons users_single-02"></i>
@@ -92,7 +95,7 @@
                                     <i class="now-ui-icons shopping_bag-16"></i>
                                     <p>Transacciones de Usuarios</p>
                                   </a>
-                                </li> 
+              </li> 
               <!-- . -->
               <li>
                       <a class="nav-link collapsed" data-toggle="collapse" href="#laravelExample" aria-expanded="false">
@@ -130,7 +133,7 @@
                       </div>
                     </li>
 
-              @endrole
+      @endrole
               <!-- . -->
               <li>
                 <a href="{{ url('/logout') }}">

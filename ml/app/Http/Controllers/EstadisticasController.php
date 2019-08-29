@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
 use Transacciones;
+use Auth;
 
 
 class EstadisticasController extends Controller
@@ -41,10 +42,7 @@ class EstadisticasController extends Controller
     }
 
     public function transacciones(Request $request)
-    {
-
-        
-
+    {     
         $transacciones = DB::table('users')->select('users.name', 'transacciones.type' ,'orders.amount', 'transacciones.currency', 'orders.created_at')
                         ->join('orders', function ($join){
                             $join->on('users.id', '=', 'orders.user_id');
@@ -57,6 +55,28 @@ class EstadisticasController extends Controller
        // $transacciones = Transacciones::all()->paginate(10);
 
         return view('estadisticas.UsuariosTransacciones',compact('transacciones'))
+        ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+    public function misTransacciones(Request $request)
+    {     
+        $id = Auth::id();
+
+        $transacciones = DB::table('users')
+                        ->join('transacciones', function ($join) use($id) {
+                            $join->on('users.id', '=', 'transacciones.user_id')
+                            ->where( 'users.id', $id );
+                        })            
+                        ->select('users.name', 
+                        'transacciones.type' ,
+                        'transacciones.amount', 
+                        'transacciones.currency', 
+                        'transacciones.created_at')                                        
+                        ->get();
+            
+ 
+
+        return view('estadisticas.misTransacciones',compact('transacciones'))
         ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 

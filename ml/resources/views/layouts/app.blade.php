@@ -11,6 +11,10 @@
 
     <title>{{ config('app.name', 'MonerLend') }}</title>
 
+ 
+
+
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     
@@ -35,6 +39,12 @@
     
     <!-- código para recapcha -->
     {!! NoCaptcha::renderJs() !!}
+
+    <!-- rangeslider -->
+    <link href="{{ asset('rangeslider/rangeslider.css') }}" rel="stylesheet">  
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.css" rel="stylesheet"> -->
+
+
 </head>
 
 
@@ -43,12 +53,19 @@
         
  
 
+            <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.js" defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" defer></script>
 
-      <!--   Core JS Files   -->
+      <!--      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        
+        
+         Core JS Files   -->
       
   <script src="{{ asset('dashboard/js/core/jquery.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('dashboard/js/core/popper.min.js') }}" type="text/javascript"></script>
@@ -66,6 +83,60 @@
   <script src=" {{ asset('dashboard/demo/demo.js') }}"></script>
   <!-- share links -->
   <script src="{{ asset('js/share.js') }}"></script>
+
+<!-- rangeslider -->
+<!--<script src=" {{ asset('rangeslider/rangeslider.js') }}"></script>-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.js"></script>
+  <script>
+
+                  
+$('input[type="range"]').rangeslider({
+  // Feature detection the default is `true`.
+    // Set this to `false` if you want to use
+    // the polyfill also in Browsers which support
+    // the native <input type="range"> element.
+    polyfill: false,
+
+    // Default CSS classes
+    rangeClass: 'rangeslider',
+    disabledClass: 'rangeslider--disabled',
+    horizontalClass: 'rangeslider--horizontal',
+    fillClass: 'rangeslider__fill',
+    handleClass: 'rangeslider__handle',
+
+    // Callback function
+    onInit: function() {
+      $rangeEl = this.$range;
+      // add value label to handle
+      var $handle = $rangeEl.find('.rangeslider__handle');
+      var handleValue = '<div class="rangeslider__handle__value">' + this.value + '</div>';
+      $handle.append(handleValue);
+      
+      // get range index labels 
+      var rangeLabels = this.$element.attr('labels');
+      rangeLabels = rangeLabels.split(', ');
+      
+      // add labels
+      $rangeEl.append('<div class="rangeslider__labels"></div>');
+      $(rangeLabels).each(function(index, value) {
+        $rangeEl.find('.rangeslider__labels').append('<span class="rangeslider__labels__label">' + value + '</span>');
+      })
+    },
+
+    // Callback function
+    onSlide: function(position, value) {
+      var $handle = this.$range.find('.rangeslider__handle__value');
+      $handle.text(this.value);
+    },
+
+    // Callback function
+    onSlideEnd: function(position, value) {}
+});
+
+</script>
+
 
 
   <script>

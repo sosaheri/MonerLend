@@ -10,8 +10,9 @@ class Transacciones extends Model
 {
 
     protected $fillable = [
-        'order_id', 'type', 'amount', 'currency',
+       'id', 'order_id', 'type', 'amount', 'currency',
     ];
 
     protected $table = 'transacciones';
+    protected $primaryKey = 'id';
 }

@@ -84,19 +84,10 @@
                               @endif
                               </p>
                             </div>
-                            <p class="description text-center">
-                            
-
-                            Invita a nuevas personas a registrarse<br>
-                            <?php //\Hashids::encode(auth()->user()->id) ?>
-                            {!! Share::page( url('/')."/register/?ref=" . auth()->user()->id , 'Unete a nuestra comunidad y Ahorra en Criptomonedas')
-                                ->facebook()
-                                ->twitter()
-                                ->whatsapp(); !!}
-                                
-                            </p>
 
                             <p class="description text-center">Ahorros disponilbes en MonerLend:</p>
+                            <p class="description text-center"><label class="badge text-center">{{ Monerlend::saldoActual( Auth::user()->id ) }}</label>
+                            </p>
 
 
 </p>

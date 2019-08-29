@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Auth;
 use Image;
 use Hash;
+use DB;
 
 class UserProfileController extends Controller
 {
@@ -40,5 +41,14 @@ class UserProfileController extends Controller
 
 
             
-        }        
+        }  
+        
+        public function amigos(){
+
+            $amigos = DB::table('users')->select('users.name', 'users.username' ,'users.avatar' , 'users.referred_by')
+            ->where('users.referred_by', '=', Auth::user()->id )
+            ->get();
+
+            return view('amigos')->with('amigos', $amigos);
+        }
 }

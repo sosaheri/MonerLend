@@ -62,20 +62,21 @@
                 {!! Form::model($user, ['method' => 'PATCH', 'route' => ['profile.update'], 'files' => true ]) !!}
                
                   <div class="row">
-                    <div class="col-md-5 pr-1">
+                    <div class="col-md-6 pr-1">
                       <div class="form-group">
                         <label>Nombre</label>
                         
                         {!! Form::text('name', null, array('placeholder' => 'Nombre','class' => 'form-control', 'disabled' => 'disabled')) !!}
                       </div>
                     </div>
-                    <div class="col-md-3 px-1">
+
+                    <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Usuario</label>
                          {!! Form::text('username', null, array('placeholder' => 'Usuario','class' => 'form-control')) !!}
                       </div>
                     </div>
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-12 pr-3">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Correo Eléctronico</label>
                         {!! Form::text('email', null, array('placeholder' => 'Correo Eléctronico','class' => 'form-control', 'disabled' => 'disabled')) !!}
@@ -83,20 +84,20 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-4 pr-1">
+                    <div class="col-md-12 pr-3">
                       <div class="form-group">
                         <label>País</label>
                          {!! Form::text('country', null, array('placeholder' => 'País','class' => 'form-control', 'disabled' => 'disabled')) !!}
                       </div>
                     </div>
-                    <div class="col-md-4 px-1">
+                    <div class="col-md-12 pr-3">
                       <div class="form-group">
                         <label> Contraseña</label>
                         
                         {!! Form::password('password', array('placeholder' => 'Contraseña','class' => 'form-control')) !!}
                       </div>
                     </div>
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-12 pr-3">
                       <div class="form-group">
                         <label>Confirme Contraseña</label>
                         
@@ -156,8 +157,9 @@
                                 ->twitter()
                                 ->whatsapp(); !!}
                            
-                            <p class="description text-center">Ahorros disponilbes en MonerLend:</p>
-
+                            <p class="description text-center">Ahorros disponibles en MonerLend: </p>
+                            <p class="description text-center"><label class="badge text-center">{{ Monerlend::saldoActual( Auth::user()->id ) }}</label>
+                            </p>
 
                             </p>
                             
@@ -187,6 +189,8 @@
                       </div>
           </div>
     </div>
+
+
 
 
 

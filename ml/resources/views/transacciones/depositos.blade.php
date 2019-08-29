@@ -127,7 +127,16 @@
                 <input type="text" class="form-control" id="lname"
                     placeholder="Usuario" name="lname" disabled="disabled" value=" {{ Auth::user()->username }}"> 
             </div> 
-              
+
+            <select id="operacion" style=" border-radius: 25px !important;"  class="form-control"
+             name="operacion" value="" placeholder="Operacion a realizar">
+
+              <option value="ahorro">Ahorro</option>
+              <option value="pago">Pago</option>
+
+                          
+            </select>  
+
             <div class="form-group"> 
                 <label for="monto">Monto:</label> 
                 <input type="text" class="form-control" id="monto" 

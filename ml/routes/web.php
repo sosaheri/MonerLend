@@ -51,9 +51,11 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 Route::get('/estadisticasRegistrados', 'EstadisticasController@registrados');
 Route::get('/estadisticasRanking', 'EstadisticasController@ranking');
 Route::get('/estadisticasTransacciones', 'EstadisticasController@transacciones');
+Route::get('/misTransacciones', 'EstadisticasController@misTransacciones')->name('estadisticas.misTransacciones');
 Route::get('/ultimosDepositos', 'EstadisticasController@ultimosDepositos');
 
 Route::get('/profile', 'UserProfileController@show')->middleware('auth')->name('profile.show');
+Route::get('/amigos', 'UserProfileController@amigos')->middleware('auth')->name('profile.amigos');
 Route::patch('/profile', 'UserProfileController@update')->middleware('auth')->name('profile.update');
 
 Route::get('/referral-link', 'HomeController@referral');
@@ -82,11 +84,19 @@ Route::get('depositos', function () {
     return view('transacciones.depositos');
 });
 
+Route::get('prestamos', function () {
+    return view('transacciones.prestamos');
+});
+
+
+
 //Route::get('/cart','CartController@show');
 //Route::get('/cart/{id}/add','CartController@add');
 //Route::get('/cart/destroy','CartController@destroy');
 
 //Route::get('/transacciones.depositos','CartController@getCheckout');
+Route::post('prestamos','PrestamosController@prestamos');
+Route::post('financiamiento','PrestamosController@financiamiento');
 Route::post('depositos','CartController@CoinGate');
 Route::post('/cart/callback', 'CartController@callback');
 Route::get('/cart/callback', 'CartController@callback');

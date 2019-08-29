@@ -11,6 +11,7 @@ use Session;
 use App\Order;
 use App\Cart;
 use App\Transacciones;
+use Monerlend;
 
 //use App\Product;
 
@@ -81,8 +82,6 @@ class CartController extends Controller
   
       public function CoinGate() {
 
-      
-
         //your app_id
         $app_id = "4839";
         //currency you want to pay
@@ -94,56 +93,57 @@ class CartController extends Controller
   
         $coingate_invoice_id = 'coingate'.rand();
   
-        $o = Order::create([
-      
-            'user_id'   => auth()->id(),
-            'coingate_invoice_id' => $coingate_invoice_id,
-            'token' => $token,
-            'amount' => request('monto'),
-            'status' => 'send'
-      
-        ]);
+            $o = Order::create([
+          
+                'user_id'   => auth()->id(),
+                'coingate_invoice_id' => $coingate_invoice_id,
+                'token' => $token,
+                'amount' => request('monto'),
+                'status' => 'send'
+          
+            ]);
   
 
-        $transaccion = Transacciones::create([
-      
-          'order_id'   => $o->id,
-          'type'       => 'deposito',
-          'amount'     => request('monto'),
-          'currency'   => $currency,
-    
-      ]);
+            $transaccion = Transacciones::create([
+
+              'user_id'    => $o->user_id,
+              'order_id'   => $o->id,
+              'type'       => request('operacion'),//'deposito',
+              'amount'     => request('monto'),
+              'currency'   => $currency,
+        
+            ]);
       
         //Post parameters , which are send to CoinGate
   
-        $post_params = array(
-            'order_id'          =>  $o->id,
-            'price_amount'      =>  request('monto'),           
-            'price_currency'          =>  $currency,           
-            'receive_currency'  =>  $receive_currency,            
-            'token'             =>  $token,            
-            'callback_url'      =>  url('/') . '/cart/callback?token='.$token,
-           //'callback_url'      => 'http://demo1.coingate.com/cart/callback?token='.$token,
-            'cancel_url'        =>  url('/') . '/cart',
-           //'cancel_url'        => 'http://demo1.coingate.com/cart',
-            'success_url'       =>  url('/') . '/myorders',
-           //'success_url'       => 'http://demo1.coingate.com/myorders',
-        );
+            $post_params = array(
+                'order_id'          =>  $o->id,
+                'price_amount'      =>  request('monto'),           
+                'price_currency'          =>  $currency,           
+                'receive_currency'  =>  $receive_currency,            
+                'token'             =>  $token,            
+                'callback_url'      =>  url('/') . '/cart/callback?token='.$token,
+              //'callback_url'      => 'http://demo1.coingate.com/cart/callback?token='.$token,
+                'cancel_url'        =>  url('/') . '/cart',
+              //'cancel_url'        => 'http://demo1.coingate.com/cart',
+                'success_url'       =>  url('/') . '/myorders',
+              //'success_url'       => 'http://demo1.coingate.com/myorders',
+            );
   
-       //Package -> coingate-php
-  
-        $order = \CoinGate\Merchant\Order::create($post_params, array(), array(
-          'environment' => 'sandbox', // sandbox OR live
-          'auth_token' => '9KY1airWZzXuBcsmdh3YJnKvztykP8SYh2bwAhYr'));
-  
-        //Session::forget('cart');
-  
-        if ($order) {
-            echo $order->status;
-            return redirect($order->payment_url);
-        } else {
-            print_r($order);
-        }
+            //Package -> coingate-php
+        
+              $order = \CoinGate\Merchant\Order::create($post_params, array(), array(
+                'environment' => 'sandbox', // sandbox OR live
+                'auth_token' => '9KY1airWZzXuBcsmdh3YJnKvztykP8SYh2bwAhYr'));
+        
+              //Session::forget('cart');
+        
+              if ($order) {
+                  echo $order->status;
+                  return redirect($order->payment_url);
+              } else {
+                  print_r($order);
+              }
   
   
       }
@@ -152,6 +152,8 @@ class CartController extends Controller
                 
                 $order = Order::find($request->input('order_id'));
 
+                Monerlend::validarRol($order);
+                
                 if ($request->input('token') == $order->token) {
         
                     $status = NULL;
@@ -178,6 +180,8 @@ class CartController extends Controller
                     }
         
                 }
+
+                
   
       }
   
