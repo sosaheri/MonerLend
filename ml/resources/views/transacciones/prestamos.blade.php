@@ -86,6 +86,14 @@
                           
                           <h4 class="card-title">Solicita un prestamo con tu saldo disponible</h4>
                         </div>
+
+                        
+                        @if(session()->has('message1'))
+                          <div class="alert alert-success">
+                            {{ session()->get('message1') }}
+                          </div>
+                        @endif
+
                         <div class="card-body">
                         <div class="container"> 
                           <form action="{{ url('/prestamos') }}" method="post"> 
@@ -111,7 +119,7 @@
                               </div>  
 
                                   <div class="rangeslider-wrap">
-                                    <input name="amount" type="range" min="1" max="{{ Monerlend::saldoActual( Auth::id() ) }}" step="1" labels="1, {{ Monerlend::saldoActual( Auth::id() ) }}">
+                                    <input name="amount" type="range" min="0" max="{{ Monerlend::saldoActual( Auth::id() ) }}" step="1" labels="1, {{ Monerlend::saldoActual( Auth::id() ) }}">
                                   </div>
                                   
 

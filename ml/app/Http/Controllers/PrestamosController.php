@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Prestamos;
 use DB;
+use App\Transacciones;
+use Auth;
 
 class PrestamosController extends Controller
 {
@@ -87,8 +89,34 @@ class PrestamosController extends Controller
     public function prestamos(Request $request)
     {
 
+        $currency = "USD";
+        $id = auth()->id();
 
-        return $request->input('amount');
+        $Ordentransaccion = Transacciones::create([
+
+            'user_id'    => $id,
+            'order_id'   => 0,
+            'type'       => 'prestamo',
+            'amount'     => request('amount') * -1,
+            'currency'   => $currency,
+       ]);
+
+        $Ordenprestamo = Prestamos::create([
+                      
+            'user_id'   => $id,
+            'monto'     => request('amount'),
+            'motivo'    => 'Prestamo simple partiendo de mis ahorros',
+            'financiante'    => $id,
+            'montoFinanciado' => 0,
+     
+        ]);
+
+
+
+        return redirect()->back()->with('message1', 'Su solictud ha sido creada exitosamente, debe esperar un lapso de 24h para que sea acreditado el prestamo.');
+   
+
+
     }
 
 
@@ -101,6 +129,9 @@ class PrestamosController extends Controller
             'motivo'    => request('motivoFinanciamiento'),
      
         ]);
+
+
+         
 
         return redirect()->back()->with('message', 'Su solictud ha sido creada exitosamente, será notificado cuando la comunidad lo avale.');
     }    
@@ -117,7 +148,7 @@ class PrestamosController extends Controller
                         ->join('prestamos', function ($join){
                             $join->on('prestamos.user_id', '=', 'users.id');
                         })                        
-                        //->where('roles.name', '!=', 'Administrador')->where('roles.name', '!=', 'Operador')
+                        ->where('prestamos.financiante', '=', NULL)
                         ->get();                        
 
                         return view('listaPorFinanciar',compact('financiamientos'));

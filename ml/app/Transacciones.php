@@ -10,7 +10,7 @@ class Transacciones extends Model
 {
 
     protected $fillable = [
-       'id', 'order_id', 'type', 'amount', 'currency',
+       'id', 'user_id','order_id', 'type', 'amount', 'currency',
     ];
 
     protected $table = 'transacciones';
