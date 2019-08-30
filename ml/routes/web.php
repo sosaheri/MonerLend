@@ -80,6 +80,8 @@ Route::group(['middleware' => ['auth']], function() {
 |--------------------------------------------------------------------------
 */
 
+Route::get('/listadoFinanciamiento', 'PrestamosController@listadoFinanciamiento')->middleware('auth')->name('listadoFinanciamiento');
+
 Route::get('depositos', function () {
     return view('transacciones.depositos');
 });
@@ -87,6 +89,8 @@ Route::get('depositos', function () {
 Route::get('prestamos', function () {
     return view('transacciones.prestamos');
 });
+
+Route::get('/financiar/{id}','PrestamosController@financiar');
 
 
 

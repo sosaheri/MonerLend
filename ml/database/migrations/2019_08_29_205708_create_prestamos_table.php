@@ -18,8 +18,8 @@ class CreatePrestamosTable extends Migration
             $table->integer('user_id');
             $table->integer('monto');
             $table->string('motivo');
-            $table->integer('financiante');
-            $table->integer('montoFinanciado');
+            $table->integer('financiante')->nullable();
+            $table->integer('montoFinanciado')->nullable();
             $table->timestamps();
         });
     }

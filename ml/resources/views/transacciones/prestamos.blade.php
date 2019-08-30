@@ -137,11 +137,21 @@
 
           <div class="row">
           <div class="col-md">
+
+
+
                         <div class="card">
                         <div class="card-header ">
                           
                           <h4 class="card-title">Pide financiamiento a la comunidad</h4>
                         </div>
+
+                        @if(session()->has('message'))
+                          <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                          </div>
+                        @endif
+
                         <div class="card-body">
 
                             <div class="container"> 

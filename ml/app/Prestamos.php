@@ -9,6 +9,6 @@ class Prestamos extends Model
     protected $fillable = [
         'user_id', 'monto', 'motivo', 'financiante', 'montoFinanciado'
     ];
-    protected $table = 'orders';
+    protected $table = 'prestamos';
     protected $primaryKey = 'id';
 }
