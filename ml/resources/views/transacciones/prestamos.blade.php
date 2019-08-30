@@ -82,6 +82,11 @@
 
                     <div class="col-md-8">
                         <div class="card card-user">
+                        <div class="card-header ">
+                          
+                          <h4 class="card-title">Solicita un prestamo con tu saldo disponible</h4>
+                        </div>
+                        <div class="card-body">
                         <div class="container"> 
                           <form action="{{ url('/prestamos') }}" method="post"> 
                               <div class="form-group"> 
@@ -121,7 +126,9 @@
                               </button> 
                           </form> 
 
-                     </div> 
+                     </div>
+                        </div>
+                         
                           
                         </div>
                     </div>
@@ -131,20 +138,28 @@
           <div class="row">
           <div class="col-md">
                         <div class="card">
+                        <div class="card-header ">
+                          
+                          <h4 class="card-title">Pide financiamiento a la comunidad</h4>
+                        </div>
+                        <div class="card-body">
+
                             <div class="container"> 
                               <form action="{{ url('/financiamiento') }}" method="post"> 
                                   <div class="form-group"> 
-                                      <label for="sol">Correo Electronico:</label> 
+                                      <label for="montoFinanciamiento">Monto:</label> 
                                       <input type="text" class="form-control"
-                                            id="sol" placeholder="algo"
-                                            name="sol"  value=" {{ Auth::user()->email }}"> 
+                                            id="montoFinanciamiento" placeholder="Monto de finaciamiento"
+                                            name="montoFinanciamiento"  > 
                                   </div> 
-                                    
-                                
 
-
-
-
+                                  <div class="form-group"> 
+                                      <label for="motivoFinanciamiento">Motivo Financiamiento:</label> 
+                                      <input type="text" class="form-control"
+                                            id="motivoFinanciamiento" placeholder="Motivo Financiamiento"
+                                            name="motivoFinanciamiento"> 
+                                  </div> 
+                                 
 
                                     
                                   {{ csrf_field() }}
@@ -154,6 +169,7 @@
                               </form> 
 
                             </div>
+                        </div>
                         </div>
           </div>
 
