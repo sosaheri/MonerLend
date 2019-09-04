@@ -12,6 +12,10 @@ use App\Order;
 use App\Cart;
 use App\Transacciones;
 use Monerlend;
+use CoinbaseCommerce\ApiClient;
+use CoinbaseCommerce\Resources\Checkout;
+use CoinbaseCommerce\Resources\Charge;
+
 
 //use App\Product;
 
@@ -196,7 +200,60 @@ class CartController extends Controller
       }
 
       public function CoinBase(){
-        
-      }
+         
+        ApiClient::init(env('API_COINBASE_EC', 'get-api'));
+
+       
+        // creamos una orden de pago a monerlen
+        $checkoutObj = new Checkout([
+          "description" => 'prueba de descripcion',//request('descripcion'),
+          "name" => "Abono de Saldo",
+          "pricing_type" => "no_price",
+          "requested_info" => ["email"]
+        ]);
+
+          // try {
+          //     $checkoutObj->save();
+              
+          //     echo sprintf("Successfully created new checkout with id: %s \n", $checkoutObj->id);
+          // } catch (\Exception $exception) {
+          //     echo sprintf("Enable to create checkout. Error: %s \n", $exception->getMessage());
+          // }
+
+      // obtenemos el id de la transaccion en $checkoutObj->id; para enviarlo a ordenes e invocar charges
+      
+      // aqui deberia crear la orden con la informacion que traemos
+
+      //empezamos a crear el charges para coinbase
+
+      $chargeObj = new Charge(
+        [
+            "description" => "Mastering the Transition to the Information Age",
+            "metadata" => [
+                "customer_id" => "id_1005",
+                "customer_name" => "Satoshi Nakamoto"
+            ],
+            "name" => "Test Name",
+            "payments" => [],
+            "pricing_type" => "no_price"
+        ]);
+              try {
+                  $chargeObj->save();
+                 // echo sprintf("Successfully created new charge with id: %s \n", $chargeObj->id);
+              } catch (\Exception $exception) {
+                //  echo sprintf("Enable to create charge. Error: %s \n", $exception->getMessage());
+              }
+
+              $chargeObj = Charge::retrieve('c2fa8dd0-b2f0-4649-a78e-a0eaf3dfb679');
+
+              // con el id del charge y la propiedad   $chargeObj->hosted_url tenemos a donde redirigir para el pago
+              echo $chargeObj;
+
+              //debemos cargar la pagina de pago en otra pesta'a
+              //y hacer que el checkout muestre las indicaciones de pago incluyendo el enlace de pago
+
+
+
+    }
 
 }
