@@ -18,10 +18,11 @@ class UserProfileController extends Controller
         public function update(Request $request){
 
             $input = $request->all();
-            if(!empty($input['password'])){ 
+            if(!empty($input['password']) && \Hash::check($input['oldpassword'], Auth::user()->password)){ 
                 $input['password'] = Hash::make($input['password']);
             }else{
-                $input = array_except($input,array('password'));    
+                return redirect()->back()->with('message2', 'Su contrasena Actual no coincide. Datos errados.');
+                   
             }
 
             // Logic for user upload of avatar
@@ -37,7 +38,9 @@ class UserProfileController extends Controller
             }
             $user = Auth::user();
             $user->update($input);
-            return view('profile', ['user' => Auth::user()] );
+            //return view('profile', ['user' => Auth::user()] )
+            return redirect()->back()->with('message', 'Sus datos fueron actualizados exitosamente.');
+            ;
 
 
             

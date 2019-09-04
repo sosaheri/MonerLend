@@ -9,12 +9,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
     <title>{{ config('app.name', 'MonerLend') }}</title>
-
- 
-
-
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     
@@ -79,17 +75,61 @@
   <script src="{{ asset('dashboard/js/plugins/chartjs.min.js') }}"></script>
   <!--  Notifications Plugin    -->
    <script src=" {{ asset('dashboard/js/plugins/bootstrap-notify.js') }}"></script>
-  <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-  <script src=" {{ asset('dashboard/demo/demo.js') }}"></script>
+  <!-- Now Ui Dashboard DEMO methods, don't include it in your project! 
+  <script src=" {{ asset('dashboard/demo/demo.js') }}"></script>-->
   <!-- share links -->
   <script src="{{ asset('js/share.js') }}"></script>
+<!-- copyclipboard -->  
+  <script src="{{ asset('clipboard/dist/clipboard.min.js') }} "></script>
 
 <!-- rangeslider -->
 <!--<script src=" {{ asset('rangeslider/rangeslider.js') }}"></script>-->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.js"></script>
+<script>
+
+$( document ).ready(function() {
+  var clipboard = new ClipboardJS('.clipboard');
+
+  clipboard.on('success', function(e) {
+     setTooltip('Copiado!');
+     hideTooltip();
+ 
+});
+
+clipboard.on('error', function(e) {
+    setTooltip('Intenta Nuevamente!');
+    hideTooltip();
+  
+});
+
+});
+
+$('#copy').tooltip({
+  trigger: 'click',
+  placement: 'bottom'
+});
+
+function setTooltip(message) {
+  $('#copy').tooltip('hide')
+    .attr('data-original-title', message)
+    .tooltip('show');
+}
+
+function hideTooltip() {
+  setTimeout(function() {
+    $('#copy').tooltip('hide');
+  }, 1000);
+}
+
+
+
+</script>
+
+
   <script>
+
 
                   
 $('input[type="range"]').rangeslider({
@@ -137,15 +177,67 @@ $('input[type="range"]').rangeslider({
 
 </script>
 
+<script>
 
 
-  <script>
+$(document).ready(function(){
+
+  function we_are_hiring() {
+        lines = [
+            "====================================================================================",
+            "    \                          \ \        /    |         ___|                       ",
+            "   _ \    __| _ \ __ \   _` |   \ \  \   / _ \ __ \     |      __| _ \  |   | __ \  ",
+            "  ___ \  |    __/ |   | (   |    \ \  \ /  __/ |   |    |   | |   (   | |   | |   | ",
+            "_/    _\_|  \___| .__/ \__,_|     \_/\_/ \___|_.__/     \____|_|  \___/ \__,_| .__/ ",
+            "                 _|                                                          _|     ",
+            "====================================================================================",
+            "  You opened the console! Know some code, do you? Want to work or contract     ",
+            "  an awesome company    https://www.larepaweb.com.ve                           ",
+            "====================================================================================="
+        ]
+        for (i = 0; i < lines.length; i ++) {
+            console.log(lines[i]);
+        }
+    }
+
+    if ($('body').hasClass('monerlend')) {
+        setTimeout(we_are_hiring, 5000);
+    }
+
+
+  
+
+
+
+
+   
+ 
+
+  
+                 
+   
+            
+
+ 
+ 
+
+
+
+ }
+
+);
+
+
+</script>
+
+
+  <!-- <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
       demo.initDashboardPageCharts();
 
     });
-  </script>
+  </script> -->
 
 </body>
 

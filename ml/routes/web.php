@@ -5,10 +5,10 @@ use App\Notifications\UserRegisteredSuccessfully;
 
 use App\User;
 
-Route::get('/test-mail', function (){
-    Notification::route('mail', 'sosaheriberto@monerlend')->notify(new UserRegisteredSuccessfully( Auth::user() ) );
-    return 'Sent';
-});
+// Route::get('/test-mail', function (){
+//     Notification::route('mail', 'sosaheriberto@monerlend')->notify(new UserRegisteredSuccessfully( Auth::user() ) );
+//     return 'Sent';
+// });
 
 /*
 |--------------------------------------------------------------------------

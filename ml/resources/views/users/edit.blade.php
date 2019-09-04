@@ -3,11 +3,11 @@
 
 @section('content')
 
-<body class="">
+<body class="monerlend">
 
 <div class="wrapper ">
 
-@extends('sidebar')
+@include('sidebar')
 
     <div class="main-panel" id="main-panel">
       <!-- Navbar -->

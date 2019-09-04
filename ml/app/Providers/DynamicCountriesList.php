@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Countries;
+use App\User;
 use Illuminate\Support\ServiceProvider;
  
 
@@ -16,8 +17,9 @@ class DynamicCountriesList extends ServiceProvider
      */
     public function boot()
     {
+
         view()->composer('*', function($view){
-            $view->with('paises', Countries::all());
+            $view->with('paises', Countries::all())->with('usuarios', User::all());
         });
     }
 }

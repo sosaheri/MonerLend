@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 
+
 @section('content')
 
-<body class="">
+<body class="monerlend">
 
 <div class="wrapper ">
 
-@extends('sidebar')
+@include('sidebar')
 
     <div class="main-panel" id="main-panel">
       <!-- Navbar -->
@@ -54,6 +55,20 @@
                                 ->twitter()
                                 ->whatsapp(); !!}
                            
+                            </p>
+                            <p class="description text-center">o copia el enlace</p>
+                            <p class="description text-center">
+                            <input id="copy" value="{{ url('/')."/register/?ref=" . auth()->user()->id }}">
+
+                            <span class="input-group-button">
+                            <button class="clipboard" data-clipboard-target="#copy">
+                            <i class="monerlend-refer fas fa-copy"></i>
+                            </button>
+                            </span>
+
+
+
+
                             </p>
               <div class="card-columns pr-3 pl-3 pb-3 ph-3">
               

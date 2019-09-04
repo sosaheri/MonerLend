@@ -91,7 +91,28 @@
                   <input type="password" style="padding:12px;" name="password_confirmation"   id="password-confirm" class="form-control" placeholder="Confirma la Contraseña" required autocomplete="new-password">
                              
                   <label style="padding:12px;" for="password-confirm">Confirma la Contraseña</label>
-                </div>                
+                </div>  
+                <div class="form-label-group">
+                 
+                <?php $flag = $_GET['ref'];
+
+               
+
+
+                for( $i=0 ; $i< sizeof($usuarios); $i++ ){
+                  if( $usuarios[$i]->id ==  $flag  ){
+                     echo 'Referido por: <b>'.$usuarios[$i]->name.'</b>';
+                  }
+                }
+                
+
+                
+                ?>
+
+                 
+
+                </div>                 
+
                 <div class="form-label-group">
                    <div class="">
                       {!! NoCaptcha::display() !!}

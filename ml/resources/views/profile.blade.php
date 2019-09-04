@@ -3,11 +3,11 @@
 
 @section('content')
 
-<body class="">
+<body class="monerlend">
 
 <div class="wrapper ">
 
-@extends('sidebar')
+@include('sidebar')
 
     <div class="main-panel" id="main-panel">
       <!-- Navbar -->
@@ -58,6 +58,18 @@
                   </div>
                 @endif
 
+                @if(session()->has('message'))
+                          <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                          </div>
+                        @endif
+
+                        @if(session()->has('message2'))
+                          <div class="alert alert-danger">
+                            {{ session()->get('message2') }}
+                          </div>
+                        @endif
+
             
                 {!! Form::model($user, ['method' => 'PATCH', 'route' => ['profile.update'], 'files' => true ]) !!}
                
@@ -73,7 +85,7 @@
                     <div class="col-md-6 pl-1">
                       <div class="form-group">
                         <label>Usuario</label>
-                         {!! Form::text('username', null, array('placeholder' => 'Usuario','class' => 'form-control')) !!}
+                         {!! Form::text('username', null, array('placeholder' => 'Usuario','class' => 'form-control' , 'disabled' => 'disabled')) !!}
                       </div>
                     </div>
                     <div class="col-md-12 pr-3">
@@ -92,16 +104,24 @@
                     </div>
                     <div class="col-md-12 pr-3">
                       <div class="form-group">
-                        <label> Contraseña</label>
+                        <label> Contraseña Actual</label>
                         
-                        {!! Form::password('password', array('placeholder' => 'Contraseña','class' => 'form-control')) !!}
+                        {!! Form::password('oldpassword', array('placeholder' => 'Contraseña Actual','class' => 'form-control')) !!}
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 pr-3">
+                      <div class="form-group">
+                        <label> Contraseña Nueva</label>
+                        
+                        {!! Form::password('password', array('placeholder' => 'Contraseña Nueva','class' => 'form-control')) !!}
                       </div>
                     </div>
                     <div class="col-md-12 pr-3">
                       <div class="form-group">
-                        <label>Confirme Contraseña</label>
+                        <label>Confirme Contraseña Nueva</label>
                         
-                        {!! Form::password('confirm-password', array('placeholder' => 'Confirme Contraseña','class' => 'form-control')) !!}
+                        {!! Form::password('confirm-password', array('placeholder' => 'Confirme Contraseña Nueva','class' => 'form-control')) !!}
        
                       </div>
                     </div>
@@ -156,6 +176,16 @@
                                 ->facebook()
                                 ->twitter()
                                 ->whatsapp(); !!}
+
+                                <p class="description text-center">o copia el enlace</p>
+                            <p class="description text-center">
+                            <input id="copy" value="{{ url('/')."/register/?ref=" . auth()->user()->id }}">
+
+                            <span class="input-group-button">
+                            <button class="clipboard" data-clipboard-target="#copy">
+                            <i class="monerlend-refer fas fa-copy"></i>
+                            </button>
+                            </span>
                            
                             <p class="description text-center">Ahorros disponibles en MonerLend: </p>
                             <p class="description text-center"><label class="badge text-center">{{ Monerlend::saldoActual( Auth::user()->id ) }}</label>

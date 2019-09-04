@@ -23,6 +23,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
+        "clipboard": "^2.0.4",
         "rangeslider.js": "^2.3.2"
     }
 }

@@ -194,4 +194,9 @@ class CartController extends Controller
           return view('transacciones.myorders',compact('myOrders'));
   
       }
+
+      public function CoinBase(){
+        
+      }
+
 }
