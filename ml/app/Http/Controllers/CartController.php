@@ -15,6 +15,7 @@ use Monerlend;
 use CoinbaseCommerce\ApiClient;
 use CoinbaseCommerce\Resources\Checkout;
 use CoinbaseCommerce\Resources\Charge;
+use CoinbaseCommerce\Webhook;
 
 
 //use App\Product;
@@ -220,13 +221,13 @@ class CartController extends Controller
           //     echo sprintf("Enable to create checkout. Error: %s \n", $exception->getMessage());
           // }
 
-      // obtenemos el id de la transaccion en $checkoutObj->id; para enviarlo a ordenes e invocar charges
-      
-      // aqui deberia crear la orden con la informacion que traemos
+          // obtenemos el id de la transaccion en $checkoutObj->id; para enviarlo a ordenes e invocar charges
+          
+          // aqui deberia crear la orden con la informacion que traemos
 
-      //empezamos a crear el charges para coinbase
+          //empezamos a crear el charges para coinbase
 
-      $chargeObj = new Charge(
+        $chargeObj = new Charge(
         [
             "description" => "Mastering the Transition to the Information Age",
             "metadata" => [
@@ -247,13 +248,39 @@ class CartController extends Controller
               $chargeObj = Charge::retrieve('c2fa8dd0-b2f0-4649-a78e-a0eaf3dfb679');
 
               // con el id del charge y la propiedad   $chargeObj->hosted_url tenemos a donde redirigir para el pago
-              echo $chargeObj;
+              //echo $chargeObj;
 
               //debemos cargar la pagina de pago en otra pesta'a
               //y hacer que el checkout muestre las indicaciones de pago incluyendo el enlace de pago
 
 
 
-    }
+      }
+
+      public function callbackCB(Request $request) {
+
+        try {
+          Webhook::verifySignature($signature, $body, $sharedSecret);
+          echo 'Successfully verified';
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+            echo 'Failed';
+        }
+
+        $secret = '6352ebb0-7385-4cb6-bd79-3d6820de490e';
+        $headerName = 'X-Cc-Webhook-Signature';
+        $headers = getallheaders();
+        $signraturHeader = isset($headers[$headerName]) ? $headers[$headerName] : null;
+        $payload = trim(file_get_contents('php://input'));
+        try {
+            $event = Webhook::buildEvent($payload, $signraturHeader, $secret);
+            http_response_code(200);
+            echo sprintf('Successully verified event with id %s and type %s.', $event->id, $event->type);
+        } catch (\Exception $exception) {
+            http_response_code(400);
+            echo 'Error occured. ' . $exception->getMessage();
+        }
+
+      }
 
 }
