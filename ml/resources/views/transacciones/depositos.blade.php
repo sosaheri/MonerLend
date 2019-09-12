@@ -40,7 +40,7 @@
 <!-- inicia contenido -->
 
           <div class="row">
-          <div class="col-md-4">
+                    <div class="col-md-4">
                       <div class="card  card-tasks">
                         <div class="card-header ">
                           
@@ -55,7 +55,7 @@
                                 <table class="table table-condensed">
                                 <tbody>
                                 <tr>
-                                <td><strong>Ahorros disponibles</strong></td>
+                                <td><strong>Balance</strong></td>
                                 <td><span class="badge badge-primary"> {{ Monerlend::saldoActual( Auth::id() ) }}  </span></td>
                                 </tr>
                                 <tr>
@@ -84,7 +84,7 @@
                         <div class="card">
                         <div class="card-header ">
                           
-                          <h4 class="card-title">Realiza tus Ahorros</h4>
+                          <h4 class="card-title">Abona saldo a tu cuenta</h4>
                         </div>
 
                         <div class="card-body">
@@ -103,14 +103,14 @@
                                             placeholder="Usuario" name="lname" disabled="disabled" value=" {{ Auth::user()->username }}"> 
                                     </div> 
 
-                                    <select id="operacion" style=" border-radius: 25px !important;"  class="form-control"
+                                    <!-- <select id="operacion" style=" border-radius: 25px !important;"  class="form-control"
                                     name="operacion" value="" placeholder="Operacion a realizar">
 
                                       <option value="ahorro">Ahorro</option>
                                       <option value="pago">Pago</option>
 
                                                   
-                                    </select>  
+                                    </select>   -->
 
                                     <div class="form-group"> 
                                         <label for="monto">Monto:</label> 

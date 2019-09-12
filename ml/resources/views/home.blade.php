@@ -61,6 +61,45 @@
                           
                         </div>
                       </div>
+
+                      <div class="card  card-tasks">
+                        <div class="card-header ">
+                          
+                          <h4 class="card-title">Estado de mi cuenta</h4>
+                        </div>
+                        <div class="card-body ">
+                        <div class="panel panel-bordered-dark panel-dark">
+                            
+                                <div class="panel-body bg-gray-dark">
+                                <p>Este es una resumen del estado de tu cuenta.</p>
+                                <div class="table-responsive">
+                                <table class="table table-condensed">
+                                <tbody>
+                                <tr>
+                                <td><strong>Balance</strong></td>
+                                <td><span class="badge badge-primary"> {{ Monerlend::saldoActual( Auth::id() ) }}  </span></td>
+                                </tr>
+                                <tr>
+                                <td><strong>Limite de Prestamos*</strong></td>
+                                <td><span class="badge badge-primary">0</span></td>
+                                </tr>
+                                <tr>
+                                
+                                </tr>
+                                </tbody>
+                                </table>
+                                </div>
+
+                                </div>
+                                </div>
+                        </div>
+                        <div class="card-footer ">
+                          <hr>
+                          
+                        </div>
+                      </div>
+
+
                     </div>
 
                     <div class="col-md-4">
@@ -86,26 +125,26 @@
                             </div>
 
                             <p class="description text-center">Ahorros disponilbes en MonerLend:</p>
-                            <p class="description text-center"><label class="badge text-center">{{ Monerlend::saldoActual( Auth::user()->id ) }}</label>
+                                <p class="description text-center"><label class="badge text-center">{{ Monerlend::saldoActual( Auth::user()->id ) }}</label>
+                                </p>
+
+
                             </p>
 
+                            <p class="description text-center">
+                            
+                                  Tokens MRL disponibles: <label class="badge ">{{ Auth::user()->token_mrl }} </label> <br>
+                                  @if (Auth::user()->getRoleNames()=='["Administrador"]')
+                                        @if( Monerlend::PuedeRetirarMRL(Auth::user()) )
 
-</p>
+                                        <button type="submit" class="btn btn-primary">Retirar MRL</button>
+                                        @else
+                                                                                                            
+                                        @endif
 
-<p class="description text-center">
- 
-      Tokens MRL disponibles: <label class="badge ">{{ Auth::user()->token_mrl }} </label> <br>
-      @if (Auth::user()->getRoleNames()=='["Administrador"]')
-            @if( Monerlend::PuedeRetirarMRL(Auth::user()) )
+                                  @endif
 
-            <button type="submit" class="btn btn-primary">Retirar MRL</button>
-            @else
-                                                                                
-            @endif
-
-      @endif
-
-  </p>
+                              </p>
                           </div>
                           <hr>
 

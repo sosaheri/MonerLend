@@ -113,7 +113,7 @@ class CartController extends Controller
 
               'user_id'    => $o->user_id,
               'order_id'   => $o->id,
-              'type'       => request('operacion'),//'deposito',
+              'type'       => 'saldo',
               'amount'     => request('monto'),
               'currency'   => $currency,
         
@@ -145,12 +145,14 @@ class CartController extends Controller
         
               if ($order) {
                   echo $order->status;
+                  Monerlend::validarRol($order);
                   return redirect($order->payment_url);
               } else {
                   print_r($order);
               }
   
-  
+             
+              
       }
   
       public function callback(Request $request) {

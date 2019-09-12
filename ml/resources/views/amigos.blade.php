@@ -82,9 +82,10 @@
                                     </div>
 
                                     <div class="col-md-7 col-sm-7">
-                                        <h5><a href="#" class="profile-link">{{ $amigo->name }}</a></h5>
-                                        <p>{{ $amigo->name }}</p>
-                                        <p class="text-muted">500m away</p>
+                                        <h5><a href="{{ url('/financiar', [$amigo->id] ) }}" class="profile-link">{{ $amigo->name }}</a></h5>
+                                        {{ $amigo->token_mrl }} Tokens MRL<br>
+                                        Rol: {{ $amigo->role }}<br>
+                                        Contacta <i class="now-ui-icons ui-1_email-85"></i>
                                     </div>
 
                                     

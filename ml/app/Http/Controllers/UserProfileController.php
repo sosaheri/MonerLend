@@ -48,7 +48,13 @@ class UserProfileController extends Controller
         
         public function amigos(){
 
-            $amigos = DB::table('users')->select('users.name', 'users.username' ,'users.avatar' , 'users.referred_by')
+            $amigos = DB::table('users')->select('users.id','users.name', 'users.username' ,'roles.name as role' ,'users.avatar' ,'users.token_mrl' , 'users.referred_by')
+            ->join('model_has_roles', function ($join){
+                $join->on('users.id', '=', 'model_has_roles.model_id');
+            })
+            ->join('roles', function ($join){
+                $join->on('model_has_roles.role_id', '=', 'roles.id');
+            })
             ->where('users.referred_by', '=', Auth::user()->id )
             ->get();
 
