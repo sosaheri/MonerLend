@@ -97,36 +97,43 @@ class Monerlend {
                case 'C+':
                $user->removeRole('C');
                $user->assignRole('C+');
+               $user->notify(new RolAssignedCPlus());
                 break;
  
                case 'B+':
                $user->removeRole('C+');
                $user->assignRole('B+');
+               $user->notify(new RolAssignedBPlus());
                break;
                
                case 'B':
                $user->removeRole('B+');
                $user->assignRole('B');
+               $user->notify(new RolAssignedB());
                break;   
                
                case 'A':
                $user->removeRole('B');
                $user->assignRole('A');
+               $user->notify(new RolAssignedA());
                break;
 
                case 'A+':
                $user->removeRole('A');
                $user->assignRole('A+');
+               $user->notify(new RolAssignedAPlus());
                break;
 
                case 'D':
                $user->removeRole('A+');
                $user->assignRole('D');
+               $user->notify(new RolAssignedD());
                break;               
 
                case 'D-':
                $user->removeRole('D');
                $user->assignRole('D-');
+               $user->notify(new RolAssignedDMinus());
                break;
 
            default:

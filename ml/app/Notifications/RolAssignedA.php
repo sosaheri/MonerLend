@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class RolAssignedBPlus extends Notification
+class RolAssignedA extends Notification
 {
     use Queueable;
 
@@ -43,11 +43,11 @@ class RolAssignedBPlus extends Notification
         return (new MailMessage)
                     ->subject('Nuevo rango de usuario en Monerlend')
                     ->greeting('Felicitaciones')
-                    ->line('Has obtenido un nuevo rango en Monerlend por haber realizado el pago completo de tu primer credito.')
+                    ->line('Has obtenido un nuevo rango en Monerlend por haber pagado tu segundo credito.')
                     ->line('')
-                    ->line('A partir de Ahora eres del rango B+')
+                    ->line('A partir de Ahora eres del rango A')
                     ->line('')
-                    ->line('Con este rango ganas 100 tokens MRL')                    
+                    ->line('Con este rango ganas 200 tokens MRL')                    
                     //->action('Notification Action', url('/'))
                     ->line('Gracias por usar nuestra aplicacion y pertenercer a la comunidad');
     }
