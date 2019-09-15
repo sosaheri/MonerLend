@@ -18,6 +18,12 @@ class Monerlend {
        
     }
 
+    public static function contadorPrestamo($user)
+    {
+       return (new DateTime("now"))->diff(new DateTime($user->mrl_counter))->days;
+       
+    }
+
     public static function puedeRetirarMRL($user)
     {
 
@@ -30,7 +36,8 @@ class Monerlend {
        
     }
 
-    public static function validarRol($order){
+    public static function validarRol($order)
+    {
  
         $depositosHechos = DB::table('transacciones')->select('transacciones.id')
                         ->join('orders', function ($join)  use($order) {

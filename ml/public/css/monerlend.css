@@ -170,3 +170,11 @@ span.fab.fa-facebook-square, span.fab.fa-twitter, span.fab.fa-whatsapp {
 span.input-group-button {
   margin: -5px;
 }
+
+#app#blog .row {
+    margin-top: 50px;
+}
+
+#app .row , .post.row {
+  margin-top: 50px !important;
+}
