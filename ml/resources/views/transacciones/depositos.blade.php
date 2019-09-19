@@ -231,8 +231,8 @@
                             @foreach ($cuotas as $cuota)
 
                                   <tr>
-                                  <td><strong>{{$cuota->cuotas_pagadas }}/{{$cuota->meses }}  </strong></td>
-                                  <td><span class="badge badge-primary"> Pagar  </span></td>
+                                  <td><strong>{{$cuota->cuotas_pagadas }}/{{$cuota->meses }} de {{$cuota->cantidad }} USD  </strong></td>
+                                  <td><a href="{{ url('/pagarCuota', [$cuota->id] ) }}"><span class="badge badge-primary"> Pagar  </span></a></td>
                                   </tr>
                             @endforeach
                             <tr>

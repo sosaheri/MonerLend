@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnUserTransacciones extends Migration
+class AddColumnStatusCuotasAhorros extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnUserTransacciones extends Migration
      */
     public function up()
     {
-        Schema::table('transacciones', function (Blueprint $table) {
-            $table->integer('user_id')->nullable()->after('id');
+        Schema::table('cuotas_ahorros', function (Blueprint $table) {
+            $table->integer('status')->default('0')->nullable()->after('id');
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnUserTransacciones extends Migration
      */
     public function down()
     {
-        Schema::table('transacciones', function (Blueprint $table) {
-        //
-        });
+        Schema::table('cuotas_ahorros', function (Blueprint $table) {
+            //
+            });
     }
 }

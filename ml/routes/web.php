@@ -67,7 +67,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/financiar/{id}','PrestamosController@financiar');
 
-
+    Route::get('pagarCuota/{cuota_id}', 'CartController@pagarCuota');
+    Route::get('saldarCuota/{id}/{mesesaPagar}/{montodePago}/{cuotadePago}', 'CartController@saldarCuota');
+    Route::get('saldarCuotaApro/{id}/{mesesaPagar}/{montodePago}/{cuotadePago}', 'CartController@saldarCuotaApro');
 
 //Route::get('/cart','CartController@show');
 //Route::get('/cart/{id}/add','CartController@add');

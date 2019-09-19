@@ -21,6 +21,9 @@ use CoinbaseCommerce\Resources\Charge;
 use CoinbaseCommerce\Webhook;
 use App\Notifications\AhorrosNotification;
 use App\Notifications\AprobarAhorrosNotification;
+use App\Notifications\AprobarCuotaAhorro;
+use App\Notifications\CuotaAhorro;
+use App\Notifications\CuotaAhorroExitosa;
 
 class CartController extends Controller
 {
@@ -172,18 +175,18 @@ class CartController extends Controller
                                                  
 
 
-        $contador = (new DateTime($fechaUltimaTransaccion->created_at))->diff(new DateTime('now') )->days; 
+        $diasParaNuevoDeposito = (new DateTime($fechaUltimaTransaccion->created_at))->diff(new DateTime('now') )->days; 
 
-        if ($ahorrosHechos > 1 && $contador > 10){
+        if ($ahorrosHechos > 1 && $diasParaNuevoDeposito > 10){
  
                 $element = User::find((array)$ui);
                 $user = $element[0];
         
                 $fechaActual = new DateTime('now');
                 $fechaSolicitud = $fechaActual->format("d-M-Y H:i");
-                $diferencia = (new DateTime($time))->diff(new DateTime('now'))->format("%i");
+                $tiempoDeSolicitud = (new DateTime($time))->diff(new DateTime('now'))->format("%i");
         
-                if ($diferencia < 15){
+                if ($tiempoDeSolicitud < 15){
                           $Ordentransaccion = Transacciones::create([
         
                             'user_id'    => $ui,
@@ -226,7 +229,7 @@ class CartController extends Controller
         $time = $fecha->format("d-M-Y H:i");
 
         $aprobacion = [
-            'amount'     => request('amount') * -1,
+            'amount'     => request('amount'),
             'months'  => request('month'),
             'user_id'    => $id,
             'order_id'   => 0,
@@ -248,16 +251,106 @@ class CartController extends Controller
       public function cuotaAhorro(){
         $id = Auth::id();
 
-        $cuotas = DB::table('cuotas_ahorros')->select('cuotas_ahorros.cuotas_pagadas','cuotas_ahorros.meses')
+        $cuotas = DB::table('cuotas_ahorros')->select( 'cuotas_ahorros.id', 'cuotas_ahorros.cantidad', 'cuotas_ahorros.cuotas_pagadas','cuotas_ahorros.meses')
                   ->join('transacciones', function ($join){
                       $join->on('transacciones.id', '=', 'cuotas_ahorros.transacciones_id');
                   })
                   ->join('users', function ($join) use($id){
                       $join->on('users.id', '=', 'transacciones.user_id');
                   })->where('users.id',$id )
+                  ->where('cuotas_ahorros.status','!=', '1')
                   ->get();
 
                   return view('transacciones.depositos',compact('cuotas'));
+
+      }
+
+      public function pagarCuota($cuota_id){
+        
+        $id = Auth::id();
+
+        $cuotas = DB::table('cuotas_ahorros')->select( 'cuotas_ahorros.id', 'cuotas_ahorros.status', 'cuotas_ahorros.cantidad', 'cuotas_ahorros.meses', 'cuotas_ahorros.cuotas_pagadas','cuotas_ahorros.meses')
+                  ->join('transacciones', function ($join){
+                      $join->on('transacciones.id', '=', 'cuotas_ahorros.transacciones_id');
+                  })
+                  ->join('users', function ($join) use($id){
+                      $join->on('users.id', '=', 'transacciones.user_id');
+                  })->where('users.id',$id )->where('cuotas_ahorros.id', $cuota_id)
+
+                  ->get();
+                  
+                  return view('transacciones.pagarCuota',compact('cuotas'));
+
+      }
+
+      public function saldarCuota($id, $mesesaPagar, $montodePago, $cuotadePago){
+        $idu = auth()->id();
+        $element = User::find((array)$idu);
+        $user = $element[0]; 
+              
+         
+
+        if ($cuotadePago == $mesesaPagar ){
+
+            DB::table('cuotas_ahorros')
+            ->where('id', $id)
+            ->update
+            (['status' => "1",
+              'cuotas_pagadas' => $cuotadePago,            
+            ]);
+
+            $user->notify(new CuotaAhorroExitosa());
+
+            return redirect()->back()->with('cuota', 'Ha realizado el pago de su ultima cuota exitosamente.');
+        }else{
+
+          DB::table('cuotas_ahorros')
+            ->where('id', $id)
+            ->update
+            ([
+              'cuotas_pagadas' => $cuotadePago,            
+            ]);
+
+            $user->notify(new CuotaAhorro());
+            return redirect()->back()->with('cuota', 'Ha realizado el pago de su cuota exitosamente.');
+
+        }
+
+        DB::table('cuotas_ahorros')
+            ->where('id', request('cuota_id'))
+            ->update
+            (['title' => "Updated Title"],
+          
+            );
+
+            return redirect()->back()->with('depositos', 'Ha realizado el pago de su cuota exitosamente.');
+
+      }
+
+      public function saldarCuotaApro($id, $mesesaPagar, $montodePago, $cuotadePago){
+        $idu = auth()->id();
+        $element = User::find((array)$idu);
+        $user = $element[0];
+       
+        $aprobacion = [
+          'id'     => $id,
+          'mesesaPagar'  => $mesesaPagar,
+          'montodePago'   => $montodePago,
+          'cuotadePago'       => $cuotadePago,           
+
+         ];
+
+      
+         $user->notify(new AprobarCuotaAhorro($aprobacion));
+     
+     
+         return redirect()->back()->with('cuota', 'Por favor ingrese en su correo y confirme la transacción.');
+     
+         
+
+        
+
+       
 
       }
 
