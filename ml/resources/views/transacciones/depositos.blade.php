@@ -57,6 +57,12 @@
                 {{ session()->get('ahorroE2') }}
               </div>
               @endif
+
+              @if(session()->has('cuotas'))
+              <div class="alert alert-sucess">
+                {{ session()->get('cuotas') }}
+              </div>
+              @endif
           </div>
 
           <div class="row">

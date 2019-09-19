@@ -81,7 +81,7 @@ Route::post('aprobarAhorrar','CartController@aprobarAhorrar');
 Route::get('ahorrar/{amount}/{months}/{ui}/{or}/{type}/{currency}/{u}/{time}/','CartController@ahorrar');
 Route::post('financiamiento','PrestamosController@financiamiento');
 Route::post('depositos','CartController@CoinGate');
-Route::get('depositos','CartController@cuotaAhorro');
+Route::get('depositos','CartController@cuotaAhorro')->name('depositos');
 
 //Route::post('depositos','CartController@CoinBase');
 Route::get('coinbase-webhook','CartController@callbackCB');

@@ -192,7 +192,7 @@ class CartController extends Controller
                             'user_id'    => $ui,
                             'order_id'   => $or,
                             'type'       => $type,
-                            'amount'     => $amount,
+                            'amount'     => $amount * -1,
                             'currency'   => $currency,
                       ]);
         
@@ -299,9 +299,18 @@ class CartController extends Controller
               'cuotas_pagadas' => $cuotadePago,            
             ]);
 
+            $Ordentransaccion = Transacciones::create([
+        
+              'user_id'    => $idu,
+              'order_id'   => 0,
+              'type'       => 'ahorro',
+              'amount'     => $mesesaPagar * $montodePago,
+              'currency'   => 'USD',
+            ]);
+
             $user->notify(new CuotaAhorroExitosa());
 
-            return redirect()->back()->with('cuota', 'Ha realizado el pago de su ultima cuota exitosamente.');
+            return redirect()->route('depositos')->with('cuotas', 'Ha realizado el pago de su ultima cuota exitosamente.');
         }else{
 
           DB::table('cuotas_ahorros')
