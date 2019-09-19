@@ -39,7 +39,7 @@ class Monerlend {
     public static function validarRol($order)
     {
  
-        $depositosHechos = DB::table('transacciones')->select('transacciones.id')
+        $ahorrosHechos = DB::table('transacciones')->select('transacciones.id')
                         ->join('orders', function ($join)  use($order) {
                             $join->on('transacciones.order_id', '=', 'orders.id');
                         })
@@ -60,7 +60,7 @@ class Monerlend {
                         ->count();   
                         
                         
-            if ($depositosHechos = 1){
+            if ($ahorrosHechos = 1){
                 Monerlend::actualizarRol($order->order_id, 'C+');
             }else if($pagoHechos = 1 /*&& pagocreditoincompleto */){
                 Monerlend::actualizarRol($order->order_id,'B');
@@ -88,9 +88,6 @@ class Monerlend {
 
          $element = User::find((array)$id);
          $user = $element[0];
-         
-         
-                
                
 
        switch ($rol) {
@@ -145,8 +142,13 @@ class Monerlend {
 
     public static function saldoActual($user)
     {
-        $ahorros = DB::table('transacciones')->select('transacciones.amount')
+        $balance = DB::table('transacciones')->select('transacciones.amount')
                         ->where('transacciones.type', '=', 'saldo')
+                        ->where('transacciones.user_id', $user)
+                        ->sum('transacciones.amount');
+
+        $ahorros = DB::table('transacciones')->select('transacciones.amount')
+                        ->where('transacciones.type', '=', 'ahorro')
                         ->where('transacciones.user_id', $user)
                         ->sum('transacciones.amount');
         $prestamos = DB::table('transacciones')->select('transacciones.amount')
@@ -155,7 +157,33 @@ class Monerlend {
                         ->sum('transacciones.amount');
                         
 
-        return $ahorros + $prestamos;
+        return $balance + $ahorros + $prestamos;
+                        
+    }
+
+    public static function ahorroActual($user)
+    {
+        $ahorros = DB::table('transacciones')->select('transacciones.amount')
+                        ->where('transacciones.type', '=', 'ahorro')
+                        ->where('transacciones.user_id', $user)
+                        ->sum('transacciones.amount');
+
+                        
+
+        return  $ahorros;
+                        
+    }
+
+    public static function prestamoActual($user)
+    {
+        $prestamos = DB::table('transacciones')->select('transacciones.amount')
+                        ->where('transacciones.type', '=', 'prestamo')
+                        ->where('transacciones.user_id', $user)
+                        ->sum('transacciones.amount');
+
+                        
+
+        return  $prestamos;
                         
     }
 

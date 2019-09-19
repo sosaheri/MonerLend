@@ -39,13 +39,61 @@ Route::get('privacidad', function () {
     return view('privacy');
 });
 
+
+Auth::routes();
+
+/*
+|--------------------------------------------------------------------------
+| Rutas con permisologia
+|--------------------------------------------------------------------------
+*/
+Route::get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
+
+
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles','RoleController');
+    Route::resource('users','UserController');
+    
+    Route::get('depositos', function () {
+        return view('transacciones.depositos');
+    });
+
+    Route::get('prestamos', function () {
+        return view('transacciones.prestamos');
+    });
+
+    Route::get('/listadoFinanciamiento', 'PrestamosController@listadoFinanciamiento')->name('listadoFinanciamiento');
+
+    Route::get('/financiar/{id}','PrestamosController@financiar');
+
+
+
+//Route::get('/cart','CartController@show');
+//Route::get('/cart/{id}/add','CartController@add');
+//Route::get('/cart/destroy','CartController@destroy');
+
+//Route::get('/transacciones.depositos','CartController@getCheckout');
+Route::post('prestamos','PrestamosController@prestamos');
+Route::post('aprobarAhorrar','CartController@aprobarAhorrar');
+Route::get('ahorrar/{amount}/{months}/{ui}/{or}/{type}/{currency}/{u}/{time}/','CartController@ahorrar');
+Route::post('financiamiento','PrestamosController@financiamiento');
+Route::post('depositos','CartController@CoinGate');
+
+//Route::post('depositos','CartController@CoinBase');
+Route::get('coinbase-webhook','CartController@callbackCB');
+
+Route::post('/cart/callback', 'CartController@callback');
+Route::get('/cart/callback', 'CartController@callback');
+Route::get('/myorders', 'CartController@myOrders');
+
+
 /*
 |--------------------------------------------------------------------------
 | Rutas para aplicación
 |--------------------------------------------------------------------------
 */
 
-Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::get('/estadisticasRegistrados', 'EstadisticasController@registrados');
@@ -61,51 +109,15 @@ Route::patch('/profile', 'UserProfileController@update')->middleware('auth')->na
 Route::get('/referral-link', 'HomeController@referral');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-/*
-|--------------------------------------------------------------------------
-| Rutas con permisologia
-|--------------------------------------------------------------------------
-*/
-Route::get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('roles','RoleController');
-    Route::resource('users','UserController');
-    
+
 });
 
-/*
-|--------------------------------------------------------------------------
-| Transacciones con permisologia
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/listadoFinanciamiento', 'PrestamosController@listadoFinanciamiento')->middleware('auth')->name('listadoFinanciamiento');
-
-Route::get('depositos', function () {
-    return view('transacciones.depositos');
-});
-
-Route::get('prestamos', function () {
-    return view('transacciones.prestamos');
-});
-
-Route::get('/financiar/{id}','PrestamosController@financiar');
 
 
 
-//Route::get('/cart','CartController@show');
-//Route::get('/cart/{id}/add','CartController@add');
-//Route::get('/cart/destroy','CartController@destroy');
 
-//Route::get('/transacciones.depositos','CartController@getCheckout');
-Route::post('prestamos','PrestamosController@prestamos');
-Route::post('financiamiento','PrestamosController@financiamiento');
-Route::post('depositos','CartController@CoinGate');
 
-//Route::post('depositos','CartController@CoinBase');
-Route::get('coinbase-webhook','CartController@callbackCB');
 
-Route::post('/cart/callback', 'CartController@callback');
-Route::get('/cart/callback', 'CartController@callback');
-Route::get('/myorders', 'CartController@myOrders');
+
+

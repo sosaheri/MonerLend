@@ -40,18 +40,11 @@
                                   </a>
               </li>                 
 
-                         
-                            <li class=" @if(\Request::route()->getName() === 'transacciones.financiamiento') active @endif ">
-                                <a href="{{ url('/listadoFinanciamiento') }}">
-                                <i class="fas fa-donate"></i>
-                                  <p>Peticiones de Financiamientos</p>
-                                </a>
-                            </li>
 
                             <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
                                 <a href="{{ url('/depositos') }}">
                                 <i class="fas fa-file-invoice-dollar"></i>
-                                  <p>Realizar Pagos o Ahorros</p>
+                                  <p>Pagos y Balance</p>
                                 </a>
                             </li>
 
@@ -64,9 +57,16 @@
                             <li class=" @if(\Request::route()->getName() === 'transacciones.depositos') active @endif ">
                                 <a href="{{ url('/prestamos') }}">
                                 <i class="fas fa-hand-holding-usd"></i>
-                                  <p>Solicitar Prestamos</p>
+                                  <p>Prestamos</p>
                                 </a>
-                            </li>                            
+                            </li>        
+                            
+                            <li class=" @if(\Request::route()->getName() === 'transacciones.financiamiento') active @endif ">
+                              <a href="{{ url('/listadoFinanciamiento') }}">
+                              <i class="fas fa-donate"></i>
+                                <p>Peticiones de Financiamientos</p>
+                              </a>
+                          </li>
 
     
 

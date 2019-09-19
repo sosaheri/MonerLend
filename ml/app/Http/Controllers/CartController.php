@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use CoinGate\CoinGate;
 
 use Session;
+use DateTime;
+use App\User;
 use App\Order;
 use App\Cart;
 use App\Transacciones;
@@ -16,9 +18,8 @@ use CoinbaseCommerce\ApiClient;
 use CoinbaseCommerce\Resources\Checkout;
 use CoinbaseCommerce\Resources\Charge;
 use CoinbaseCommerce\Webhook;
-
-
-//use App\Product;
+use App\Notifications\AhorrosNotification;
+use App\Notifications\AprobarAhorrosNotification;
 
 class CartController extends Controller
 {
@@ -145,7 +146,7 @@ class CartController extends Controller
         
               if ($order) {
                   echo $order->status;
-                  Monerlend::validarRol($order);
+                  
                   return redirect($order->payment_url);
               } else {
                   print_r($order);
@@ -155,11 +156,101 @@ class CartController extends Controller
               
       }
   
+      public function ahorrar($amount, $months, $ui, $or, $type, $currency, $u, $time){
+        
+
+        $ahorrosHechos = DB::table('transacciones')->select('transacciones.id')
+                      ->where('transacciones.type', '=', 'ahorro')
+                      ->where('transacciones.user_id', $ui)
+                      ->count();
+
+        $fechaUltimaTransaccion = DB::table('transacciones')->select('transacciones.created_at')
+                      ->where('transacciones.type', '=', 'ahorro')
+                      ->where('transacciones.user_id', $ui)
+                      ->orderBy('transacciones.created_at', 'desc')->first();
+                                                 
+
+
+        $contador = (new DateTime($fechaUltimaTransaccion->created_at))->diff(new DateTime('now') )->days; 
+
+        if ($ahorrosHechos > 1 && $contador > 10){
+ 
+                $element = User::find((array)$ui);
+                $user = $element[0];
+        
+                $fechaActual = new DateTime('now');
+                $fechaSolicitud = $fechaActual->format("d-M-Y H:i");
+                $diferencia = (new DateTime($time))->diff(new DateTime('now'))->format("%i");
+        
+                if ($diferencia < 15){
+                          $Ordentransaccion = Transacciones::create([
+        
+                            'user_id'    => $ui,
+                            'order_id'   => $or,
+                            'type'       => $type,
+                            'amount'     => $amount,
+                            'currency'   => $currency,
+                      ]);
+        
+                        $user->notify(new AhorrosNotification());
+                      
+                        return redirect()->back()->with('ahorro', 'Su solicitud ha sido creada exitosamente.');
+                }else{
+                        return redirect()->back()->with('ahorroE', 'Su solicitud no fue procesada ya que transcurrieron mas de 15 minutos, intente nuevamente.');
+                }
+
+                                       
+        }else{
+                return redirect()->back()->with('ahorroE2', 'Su solicitud no fue procesada ya que no han transcurrido mas de 10 días de su ultimo ahorro.');
+                
+
+        }                      
+        
+
+        
+        
+
+       
+       
+   
+
+      }
+
+      public function aprobarAhorrar(Request $request){
+        
+        
+        $currency = "USD";
+        $id = auth()->id();
+        $element = User::find((array)$id);
+        $user = $element[0];
+        $fecha = new DateTime('now');
+        $time = $fecha->format("d-M-Y H:i");
+
+        $aprobacion = [
+            'amount'     => request('amount') * -1,
+            'months'  => request('month'),
+            'user_id'    => $id,
+            'order_id'   => 0,
+            'type'       => 'ahorro',           
+            'currency'   => $currency,       
+            'user'       => $user,
+            'time'       => $time,     
+
+        ];
+
+        $user->notify(new AprobarAhorrosNotification($aprobacion));
+       
+        return redirect()->back()->with('ahorro', 'Por favor ingrese en su correo y confirme la transacción.');
+       
+   
+
+      }
+
       public function callback(Request $request) {
                 
                 $order = Order::find($request->input('order_id'));
 
-                Monerlend::validarRol($order);
+                
                 
                 if ($request->input('token') == $order->token) {
         
@@ -192,6 +283,7 @@ class CartController extends Controller
   
       }
   
+
       public function myOrders() {
   
           $user_id = auth()->id();

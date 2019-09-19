@@ -114,13 +114,11 @@
 
                               <div class=""> 
                                   <label for="amount">Monto:</label> 
-
-
                               </div>  
 
-                                  <div class="rangeslider-wrap">
+                              <div class="rangeslider-wrap">
                                     <input name="amount" type="range" min="0" max="{{ Monerlend::saldoActual( Auth::id() ) }}" step="1" labels="1, {{ Monerlend::saldoActual( Auth::id() ) }}">
-                                  </div>
+                              </div>
                                   
 
 
