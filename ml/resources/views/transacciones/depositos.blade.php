@@ -215,7 +215,7 @@
             </div>
                 
             <div class="col-md-3">
-                  <div class="card  card-tasks">
+                  <div class="pagoAhorro card  card-tasks">
                     <div class="card-header ">
                       
                       <h4 class="card-title">Pagar cuota de ahorro</h4>
@@ -224,26 +224,23 @@
                     <div class="panel panel-bordered-dark panel-dark">
                         
                             <div class="panel-body bg-gray-dark">
-                            <p>Realiza el pago de tu cuota mensual.</p>
+                            <p>Selecciona tu cuota a pagar</p>
                             <div class="table-responsive">
                             <table class="table table-condensed">
                             <tbody>
-                            <tr>
-                            <td><strong>Balance</strong></td>
-                            <td><span class="badge badge-primary"> {{ Monerlend::saldoActual( Auth::id() ) }}  </span></td>
-                            </tr>
-                            <tr>
-                            <td><strong>Limite de Prestamos*</strong></td>
-                            <td><span class="badge badge-primary">0</span></td>
-                            </tr>
+                            @foreach ($cuotas as $cuota)
+
+                                  <tr>
+                                  <td><strong>{{$cuota->cuotas_pagadas }}/{{$cuota->meses }}  </strong></td>
+                                  <td><span class="badge badge-primary"> Pagar  </span></td>
+                                  </tr>
+                            @endforeach
                             <tr>
                             
                             </tr>
                             </tbody>
                             </table>
                             </div>
-                            <p>El cupo máximo de crédito, será el mismo valor depositado en ahorro..</p>
-                            <p>Los Préstamos se procesarán en un lapso de 24 horas luego de la solicitud.</p>
                             </div>
                             </div>
                     </div>

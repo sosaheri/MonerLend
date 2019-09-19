@@ -178,3 +178,7 @@ span.input-group-button {
 #app .row , .post.row {
   margin-top: 50px !important;
 }
+
+.pagoAhorro.card {
+  min-height: 435px !important;
+}

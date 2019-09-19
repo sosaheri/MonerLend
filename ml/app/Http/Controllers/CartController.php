@@ -10,6 +10,7 @@ use CoinGate\CoinGate;
 use Session;
 use DateTime;
 use App\User;
+use Auth;
 use App\Order;
 use App\Cart;
 use App\Transacciones;
@@ -201,9 +202,7 @@ class CartController extends Controller
 
                                        
         }else{
-                return redirect()->back()->with('ahorroE2', 'Su solicitud no fue procesada ya que no han transcurrido mas de 10 días de su ultimo ahorro.');
-                
-
+                return redirect()->back()->with('ahorroE2', 'Su solicitud no fue procesada ya que no han transcurrido mas de 10 días de su ultimo ahorro.');     
         }                      
         
 
@@ -243,6 +242,22 @@ class CartController extends Controller
         return redirect()->back()->with('ahorro', 'Por favor ingrese en su correo y confirme la transacción.');
        
    
+
+      }
+
+      public function cuotaAhorro(){
+        $id = Auth::id();
+
+        $cuotas = DB::table('cuotas_ahorros')->select('cuotas_ahorros.cuotas_pagadas','cuotas_ahorros.meses')
+                  ->join('transacciones', function ($join){
+                      $join->on('transacciones.id', '=', 'cuotas_ahorros.transacciones_id');
+                  })
+                  ->join('users', function ($join) use($id){
+                      $join->on('users.id', '=', 'transacciones.user_id');
+                  })->where('users.id',$id )
+                  ->get();
+
+                  return view('transacciones.depositos',compact('cuotas'));
 
       }
 
